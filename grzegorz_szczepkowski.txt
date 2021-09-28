@@ -264,3 +264,126 @@ int main()
 }
 
 // GJ 6
+zadania z 28.09.2021    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+zadanie.1 -- Silnia liczby naturalnej n
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	unsigned int n;
+	long long silnia = 1;
+
+	cout << "Podaj n: ";
+	cin >> n;
+
+	for (int i = n; i > 1; i--)
+		silnia *= i;
+
+	cout << n << "! = " << silnia << endl;
+
+	return 0;
+}
+zadanie.1.1 -- Silnia liczby naturalnej n
+#include <iostream>
+using namespace std;
+
+int silnia(int n) {
+	if (n == 1) {
+		return 1;
+	}
+	else {
+		return n * silnia(n - 1);
+	}
+}
+
+int main()
+{
+	int n;
+	cout << "Podaj ile liczb: ";
+	cin >> n;
+
+	cout << silnia(n);
+
+	return 0;
+}
+kartkówka.XD2
+#include <iostream>
+#include <math.h>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+// za pomocą funkcji void oblicz oblicz wartość c z twierdzenia pitagorasa 
+//  3 4 5
+
+void pitagoras(int a, int b){
+	int c = (a * a) + (b * b);
+	cout <<sqrt(c) << endl;
+}
+
+int main(int a, int b)
+{
+	int c;
+	cout << "podaj a=" << endl;
+	cin >> a;
+	cout << "podaj b=" << endl;
+	cin >> b;
+	pitagoras(a, b);
+
+	return 0;
+}
+zadanie.2 ciąg fibonaciego
+#include <iostream>
+using namespace std;
+
+int fibonaci(int n) {
+	if (n == 0) {
+		return 0;
+	}
+	else if (n == 1) {
+		return 1;
+	}
+	else {
+		return fibonaci(n-1) + fibonaci(n-2);
+	}
+}
+
+int main()
+{
+	int n;
+	cout << "Podaj ile liczb: ";
+	cin >> n;
+
+	cout << fibonaci(n);
+
+	return 0;
+}
+zadanie.3 // kantor
+#include <iostream>
+using namespace std;
+
+double eu_pln(double n) {
+	return n = n * 4, 62;
+}
+double pln_eu(double n) {
+	return n = n * 0, 22;
+}
+void kantor(int n) {
+	switch (n)
+	{
+	default:
+		break;
+	}
+}
+int main()
+{
+	cout << "wybory przeliczania walut: " << endl;
+
+	int n;
+
+	cin << n << endl;
+
+	kantor(n)
+
+	return 0;
+}
