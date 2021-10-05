@@ -387,3 +387,33 @@ int main()
 
 	return 0;
 }
+zadania z 5.10.2021    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// zadanie.1
+// zadanie.1.1 -- losowe życzenia z róznych okazji - tablice; wyświetl 5 przykładów
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_CTYPE, "Polish");
+    string tab[8];
+    tab[0] = "Wszystkiego najlepszego";
+    tab[1] = "dużo zdrowia";
+    tab[2] = "karaluchy pod poduch";
+    tab[3] = "połamania nóg";
+    tab[4] = "zdrowia";
+    tab[5] = "szczęścia";
+    tab[6] = "lat sto";
+    tab[7] = "pan bóg z tobą";
+
+    srand(time(NULL));
+    for (int i = 0; i < 5; i++) {
+        int x = rand() % 8;
+        cout << tab[x] << endl;
+    }
+    return 0;
+}
