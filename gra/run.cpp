@@ -82,4 +82,5 @@ int main()
 
     int wynik = 1;
     return game_over(wynik);
+    return 0; // tu może być zapisywanie wyniku ponieważ jeszcze widnieje tu
 }
