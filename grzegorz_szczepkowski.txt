@@ -400,7 +400,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_CTYPE, "Polish");
-    string tab[8];
+    string tab[9];
     tab[0] = "Wszystkiego najlepszego";
     tab[1] = "dużo zdrowia";
     tab[2] = "karaluchy pod poduch";
@@ -409,11 +409,36 @@ int main()
     tab[5] = "szczęścia";
     tab[6] = "lat sto";
     tab[7] = "pan bóg z tobą";
+    tab[8] = "smacznej kwusi";
 
     srand(time(NULL));
     for (int i = 0; i < 5; i++) {
-        int x = rand() % 8;
+        int x = rand() % 9;
         cout << tab[x] << endl;
     }
     return 0;
 }
+zadanie.gra
+/*
+Dziś na zajęciach będziemy programowali prostą grę kościaną :D 
+
+Na początku ma się pojawić z ilu graczy będzie składała się rozgrywka max 4 
+
+Użytkownik może wybrać sobie nick. 
+
+Każdy gracz ma mieć symulowany rzut dwiema kośćmi do gry oraz sumowany wynik 
+
+Gracz z najwyższą sumą punktów ma wygrywać rundę 
+
+Jeżeli dochodzi do remisu pomiędzy dowolną ilością graczy,  ma być powtarzany rzut kośćmi tylko pomiędzy graczami którzy mieli ten sam wynik 
+
+Po sześciu rundach rozgrywka się kończy i jest przedstawiona tablica wyników 
+
+Zasady na + 
+
+Gracz który uzyska szóstkę na obu kostkach ma mieć możliwość dodatkowego rzutu  kośćmi w tej samej rundzie i dodania go do całego wyniku z rundy. 
+
+Gracz któremu na obu kostkach wypadnie wynik parzysty może dodać +1 do wyniku 
+
+Gracz któremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktów 
+*/
