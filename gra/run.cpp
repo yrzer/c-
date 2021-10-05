@@ -5,6 +5,7 @@
 #include <ctime>
 using namespace std;
 
+
 void zasady() {
 setlocale(LC_CTYPE, "Polish");
 cout << " " << endl;
@@ -22,22 +23,39 @@ void autorzy() {
     cout << " " << endl;
     cout << " zespół Timon i Pumba company " << endl;
     cout << " członkowie: " << endl;
-    cout << "    timon - kosiara2015(bartek żebrowski)  " << endl;
-    cout << "   pumba - yrzer(grzegorz szczepkowski)" << endl;
+    cout << "    timon - kosiara2015 (bartek żebrowski)  " << endl;
+    cout << "   pumba - yrzer (grzegorz szczepkowski)" << endl;
     cout << " " << endl;
 }
 int game_over(int wynik) {
     setlocale(LC_CTYPE, "Polish");
     cout << " " << endl;
-    cout << " wynik" << wynik << endl;
-    cout << " koniec - nie ma już nic więc wciśnij losowy przcisk" << endl;
-    return 0;
+    cout << " wynik = " << wynik << endl;
+    cout << " koniec \n | 1:exit | 2:restart <error> | = " << endl;
+    int endgame;
+    cin >> endgame;
+    switch (endgame)
+    {
+    case 1:
+    system("pause");
+    return wynik;
+    break;
+    case 2:
+    // error
+    break;
+    default:
+    cout << " error " << endl;
+    return game_over(wynik);
+    break;
+    }
 }
 
 
 int main()
 {
+    // system("chcp 65001");
     setlocale(LC_CTYPE, "Polish");
+    // if(wynik == 0) cout << "poprzedni wynik: "<< wynik << endl;
     cout << "gra kościana :D | play:1 | zasady:2 | autorzy:3 | ?:4 ||liczba:";
     int menu;
     cin >> menu;
@@ -61,9 +79,7 @@ int main()
         break;
     }
     
-    
-    
 
-    int wynik = 0;
+    int wynik = 1;
     return game_over(wynik);
 }
