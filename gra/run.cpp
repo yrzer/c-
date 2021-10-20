@@ -3,32 +3,18 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctime>
+
 using namespace std;
 
 void zasady() { // zasady gry
-setlocale(LC_CTYPE, "Polish");
-cout << " " << endl;
-cout << "Gracz z najwyższą sumą punktów - wygrywa rundę " << endl;
-cout << "rund - 6 " << endl;
-cout << "remis w rundzie - powtarzanie rundy tylko remisowych " << endl;
-cout << "Zasady + " << endl;
-cout << "Gracz który uzyska szóstkę na obu kostkach ma  możliwość dodatkowego rzutu  kośćmi w tej samej rundzie i dodaje do całego wyniku z rundy " << endl;
-cout << "Gracz któremu na obu kostkach wypadnie wynik parzysty może dodać + 1 do wyniku " << endl;
-cout << "Gracz któremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktów " << endl;
-cout << " " << endl;
+    cout << " Gracz z najwyzsza suma punktow - wygrywa rundę \n ilosc round - 6 \n remis w rundzie - powtarzanie rundy tylko remisowych \n Zasady - \n Gracz ktory uzyska szostke na obu kostkach ma  mozliwosc dodatkowego rzutu  koscmi w tej samej rundzie i dodaje do calego wyniku z rundy \n Gracz ktoremu na obu kostkach wypadnie wynik parzysty moze dodac + 1 do wyniku \n Gracz ktoremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktow  \n  \n " << endl;
 }
+
 void autorzy() { // informacje na temat autorów
-    setlocale(LC_CTYPE, "Polish");
-    cout << " " << endl;
-    cout << " zespół Timon i Pumba company " << endl;
-    cout << " członkowie: " << endl;
-    cout << "    timon - kosiara2015 (bartek żebrowski)  " << endl;
-    cout << "   pumba - yrzer (grzegorz szczepkowski)" << endl;
-    cout << " " << endl;
+    cout << "\n zespol Timon i Pumba company \n czlonkowie: \n Timon - kosiara2015 (Bartek Zebrowski) \n Pumba - yrzer (Grzegorz Szczepkowski) \n  \n "<< endl;
 }
 
 int rzut() {    // funkcja rzucenia kostką
-	setlocale(LC_CTYPE, "Polish");
 
 	int w_kostka;	
 	cout << "wartości wylosowane przez magiczną kostke: ";
@@ -41,7 +27,6 @@ int rzut() {    // funkcja rzucenia kostką
 }
 
 int game_over(int wynik) { // menu końca gry
-    setlocale(LC_CTYPE, "Polish");
     cout << " " << endl;
     cout << " wynik = " << wynik << endl;
     cout << " koniec \n | 1:exit | 2:restart <error> | = " << endl;
@@ -53,26 +38,26 @@ int game_over(int wynik) { // menu końca gry
     system("pause");
     return wynik;
     break;
-    case 2:
-    // error
+        case 2: // error
     break;
     default:
-    cout << " error " << endl;
-    return game_over(wynik);
+        cout << " error " << endl;
+        return game_over(wynik);
     break;
     }
     return 0;
+
 }
 int l_g(){ // liczba graczy zmienna
     int liczba_graczy;
-	cout << "ile jest graczy: ";
+	cout << "\n ile jest graczy: ";
 	cin >> liczba_graczy; 
 	if (liczba_graczy < 5 && liczba_graczy > 1){
-	        cout << "spoko możesz grać";
-            return liczba_graczy;
+	        cout << " \n spoko mozesz grac \n ";
+            return start();
 	    }
 	    else {
-	        cout << "NO TY CHYBA SOBIE JAJA ROBISZ, NIE GRASZ ZDRADZIECKA KURWO \n";
+	        cout << "NO TY CHYBA SOBIE JAJA ROBISZ, NIE GRASZ ZDRADZIECKA KURWO \n \n ";
             return l_g();
         }
 }
