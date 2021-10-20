@@ -68,28 +68,47 @@ int l_g()
 
 }
 string nik_name(int liczba_graczy){
-    string player[4];
+    string player[liczba_graczy];
     for(int i=0; liczba_graczy > i; i++){
-        cout << " \n 1wpisz nazwe gracza nr"<< i + 1 << endl;
+        cout << " \n wpisz nazwe gracza nr "<< i + 1 << ": ";
         cin >> player[i];
     }
-    return player[4];
+if (liczba_graczy==2)
+{
+    return player[0],player[1];
+}
+else if (liczba_graczy==3)
+{
+    return player[0],player[1],player[2];
+}
+else
+{
+   return player[0],player[1],player[2],player[3]; 
+}
+
+    
 }
 
 int start(){
-    string player[4];
         int liczba_graczy = l_g();
+            string player[liczba_graczy];
         nik_name(liczba_graczy);
-        cout << " witajcie gracze \n" << player[1] << endl;
-        cout << player[2] << endl;
-        cout << player[3] << endl;
-        cout << player[4] << endl;
+
+        cout << " witajcie gracze : " << endl;
+
+        for(int i=0; liczba_graczy > i; i++){
+        cout << " nr"<< i + 1 << ": " << player[i] << endl;
+    }
+
+        
+        
+                
 
         // return nawet nie wim
 }
 int main() // działanie gry
 {
-    cout << "gra kosciana :D | play:1 | zasady:2 | autorzy:3 | ?:4 ||liczba:";
+    cout << "gra kosciana :D | play:1 | zasady:2 | autorzy:3 | ?:4 ||liczba: ";
     int menu;
     cin >> menu;
     switch (menu)
