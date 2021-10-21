@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctime>
+#include <cstdio>
 using namespace std;
 
 void zasady() { // zasady gry
@@ -67,7 +68,7 @@ int l_g()
     }
 
 }
-string nik_name(int liczba_graczy){
+/* string nik_name(int liczba_graczy){
     string player[liczba_graczy];
     for(int i=0; liczba_graczy > i; i++){
         cout << " \n wpisz nazwe gracza nr "<< i + 1 << ": ";
@@ -88,23 +89,30 @@ else
 
     
 }
-
+*/
 int start(){
-        int liczba_graczy = l_g();
-            string player[liczba_graczy];
-        nik_name(liczba_graczy);
-
+  int liczba_graczy = l_g();
+  string player[liczba_graczy];
+    if (liczba_graczy==2){
+        player[2]= {'a','b'};
+    }
+    else if (liczba_graczy==3){
+        player[3]= {'a','b','c'};
+    }
+    else{
+        player[4]= {'a','b','c','d'};
+    }
+//        nik_name(liczba_graczy);
+/*
         cout << " witajcie gracze : " << endl;
 
         for(int i=0; liczba_graczy > i; i++){
         cout << " nr"<< i + 1 << ": " << player[i] << endl;
     }
-
-        
-        
+*/
                 
 
-        // return nawet nie wim
+//    return wynik[]
 }
 int main() // działanie gry
 {
