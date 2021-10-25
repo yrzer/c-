@@ -1,18 +1,13 @@
 // zadanie.gra
-#include <iostream>
+#include <iostream> // nagłówek potrzebny do wprowadzenia jakiś danych 
 #include <stdlib.h>
-#include <time.h>
-#include <ctime> 
-#include <cstdio>
-#include <Windows.h>
-#include <fstream>
-#include <conio.h>
-#include <sstream>
+#include <ctime> // dodaje nam rand() i srand () 
+#include <Windows.h> // dodaje nam opóźnienie
 using namespace std;
 // globalne zmienne
 int liczba_graczy;
 int z_rzut[4][8]; // rzuty kostką [4]- gracze ; [6]-rundy, [7]-wygrane rundy
-string player[4][8]; // dugi wymiar po rundy // trzeci wybar zapisuje sume wygranych więc ruda musi mieć 0
+string player[4]; // zapisywanie graczy
 int rzut_k() // funkcja rzucenia kostką 
 {    
 	int w_kostka;
@@ -30,25 +25,25 @@ int rzut_k() // funkcja rzucenia kostką
 }
 void wg_r(int r){
     if (z_rzut[0][r] > z_rzut[1][r] && z_rzut[0][r] > z_rzut[2][r] && z_rzut[0][r] > z_rzut[3][r]) {
-			cout << "wygral: " << player[0][0] << endl;
+			cout << "wygral: " << player[0] << endl;
 			z_rzut[0][7] = z_rzut[0][7] + 1;
 		}
 		else if (z_rzut[1][r] > z_rzut[0][r] && z_rzut[0][r] > z_rzut[2][r] && z_rzut[0][r] > z_rzut[3][r]) {
-			cout << "wygral: " << player[1][0] << endl;
+			cout << "wygral: " << player[1] << endl;
 			z_rzut[1][7] = z_rzut[1][7] + 1;
 		}
 		else if (z_rzut[2][r] > z_rzut[1][r] && z_rzut[0][r] > z_rzut[0][r] && z_rzut[0][r] > z_rzut[3][r]) {
-			cout << "wygral: " << player[2][0] << endl;
+			cout << "wygral: " << player[2] << endl;
 			z_rzut[2][7] = z_rzut[2][7] + 1;
 		}
 		else if (z_rzut[3][r] > z_rzut[1][r] && z_rzut[0][r] > z_rzut[2][r] && z_rzut[0][r] > z_rzut[0][r]) {
-			cout << " wygral: " << player[3][0] << endl;
+			cout << " wygral: " << player[3] << endl;
 			z_rzut[3][7] = z_rzut[3][7] + 1;
 		}
 }
 void s_r_g(int r,int i){// symulowanie rzutów graczy  
     cout << "gracz nr "<< i+1  // jaki gracz/player 0 czyli 1 
-    << " - " << player[i][0] << endl; // musin być zero bo to jest lina gracza w tabeli
+    << " - " << player[i] << endl; // musin być zero bo to jest lina gracza w tabeli
     cout << "symulowanie rzutem podwujnej kosci ...\n";
     Sleep(2000); // odczekanie sekundy
     z_rzut[i][r] = rzut_k();
@@ -58,67 +53,67 @@ Sleep(1000); // odczekanie sekundy
 }
 void sprawdzenie_if(int r){
     if (z_rzut[0][r] == z_rzut[1][r]) {
-			cout << "Remis " << player[0][0] << " miedzy " << player[1][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[0][0] << endl;
+			cout << "Remis " << player[0] << " miedzy " << player[1] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[0] << endl;
 			z_rzut[0][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[0][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[1][0] << endl;
+			cout << "rzuca gracz: " << player[1] << endl;
 			z_rzut[1][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[1][r] << endl;
 			Sleep(700);
 		}
 		else if (z_rzut[0][r] == z_rzut[2][r]) {
-			cout << "Remis " << player[0][0] << " miedzy " << player[2][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[0][0] << endl;
+			cout << "Remis " << player[0] << " miedzy " << player[2] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[0] << endl;
 			z_rzut[0][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[0][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[2][0] << endl;
+			cout << "rzuca gracz: " << player[2] << endl;
 			z_rzut[2][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[2][r] << endl;
 			Sleep(700);
 		}
 		else if (z_rzut[0][r] == z_rzut[3][r]) {
-			cout << "Remis " << player[0][0] << " miedzy " << player[3][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[0][0] << endl;
+			cout << "Remis " << player[0] << " miedzy " << player[3] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[0] << endl;
 			z_rzut[0][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[0][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[3][0] << endl;
+			cout << "rzuca gracz: " << player[3] << endl;
 			z_rzut[3][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[3][r] << endl;
 			Sleep(700);
 		}
 		else if (z_rzut[1][r] == z_rzut[2][r]) {
-			cout << "Remis " << player[1][0] << " miedzy " << player[2][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[1][0] << endl;
+			cout << "Remis " << player[1] << " miedzy " << player[2] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[1] << endl;
 			z_rzut[1][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[1][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[2][0] << endl;
+			cout << "rzuca gracz: " << player[2] << endl;
 			z_rzut[2][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[2][r] << endl;
 			Sleep(700);
 		}
 		else if (z_rzut[1][r] == z_rzut[3][r]) {
-			cout << "Remis " << player[1][0] << " miedzy " << player[3][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[1][0] << endl;
+			cout << "Remis " << player[1] << " miedzy " << player[3] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[1] << endl;
 			z_rzut[1][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[1][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[3][0] << endl;
+			cout << "rzuca gracz: " << player[3] << endl;
 			z_rzut[3][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[3][r] << endl;
 			Sleep(700);
 		}
 		else if (z_rzut[2][r] == z_rzut[3][r]) {
-			cout << "Remis " << player[2][0] << " miedzy " << player[3][0] << "\nGracze zaczynaja jeszcze raz" << endl;
-			cout << "rzuca gracz: " << player[2][0] << endl;
+			cout << "Remis " << player[2] << " miedzy " << player[3] << "\nGracze zaczynaja jeszcze raz" << endl;
+			cout << "rzuca gracz: " << player[2] << endl;
 			z_rzut[2][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[2][r] << endl;
 			Sleep(700);
-			cout << "rzuca gracz: " << player[3][0] << endl;
+			cout << "rzuca gracz: " << player[3] << endl;
 			z_rzut[3][r] = rzut_k();
 			cout << "wynik rzutu = " << z_rzut[3][r] << endl;
 			Sleep(700);
@@ -154,12 +149,12 @@ void nick_player(){// wpisywanie nicków garczy
     cout << "wpisz nicki: \n";
     for (int i = 0; i < liczba_graczy; i++){
         cout << i+1 << " player = ";
-        cin >> player[i][0];
+        cin >> player[i];
     } // potwierdza liczbe i nicki graczy
     cout << "nicki: ";
     for (int i = 0; i < liczba_graczy; i++){
         cout << i+1 << "  player = ";
-        cout << player[i][0] << " ";
+        cout << player[i] << " ";
     }
     cout << " \n";
 }
@@ -182,27 +177,27 @@ void w_t_p() { // wytłumaczenie tabeli player
 void autorzy() { // informacje na temat autorów
     cout << "\n zespol Timon i Pumba company \n czlonkowie: \n Timon - kosiara2015 (Bartek Zebrowski) \n Pumba - yrzer (Grzegorz Szczepkowski) \n  \n "<< endl;}
 void koniec(){
-    cout << player[0][0] << " wygral: " << z_rzut[0][7] << " rund" << endl;
-	cout << player[1][0] << " wygral: " << z_rzut[1][7] << " rund" << endl;
+    cout << player[0] << " wygral: " << z_rzut[0][7] << " rund" << endl;
+	cout << player[1] << " wygral: " << z_rzut[1][7] << " rund" << endl;
 	if (liczba_graczy > 2) {
-		cout << player[2][0] << " wygral: " << z_rzut[2][7] << " rund" << endl;
+		cout << player[2] << " wygral: " << z_rzut[2][7] << " rund" << endl;
 
 		if (liczba_graczy > 3) {
-			cout << player[3][0] << " wygral: " << z_rzut[3][7] << " rund" << endl;
+			cout << player[3] << " wygral: " << z_rzut[3][7] << " rund" << endl;
 		}
         cout << endl;
 	}
 	if (z_rzut[0][7] > z_rzut[1][7] && z_rzut[0][7] > z_rzut[2][7] && z_rzut[0][7] > z_rzut[3][7]) {
-		cout << "GRATULACJE GRACZU: " << player[0][0] << " WYGRAlEs";
+		cout << "GRATULACJE GRACZU: " << player[0] << " WYGRAlEs";
 	}
 	else if (z_rzut[1][7] > z_rzut[0][7] && z_rzut[1][7] > z_rzut[2][7] && z_rzut[1][7] > z_rzut[3][7]) {
-		cout << "GRATULACJE GRACZU: " << player[1][0] << " WYGRAlEs";
+		cout << "GRATULACJE GRACZU: " << player[1] << " WYGRAlEs";
 	}
 	else if (z_rzut[2][7] > z_rzut[1][7] && z_rzut[2][7] > z_rzut[0][7] && z_rzut[2][7] > z_rzut[3][7]) {
-		cout << "GRATULACJE GRACZU: " << player[2][0] << " WYGRAlEs";
+		cout << "GRATULACJE GRACZU: " << player[2] << " WYGRAlEs";
 	}
 	else if (z_rzut[3][7] > z_rzut[1][7] && z_rzut[3][7] > z_rzut[2][7] && z_rzut[3][7] > z_rzut[0][7]) {
-		cout << "GRATULACJE GRACZU: " << player[3][0] << " WYGRAlEs";
+		cout << "GRATULACJE GRACZU: " << player[3] << " WYGRAlEs";
 	}
 }
 bool game_over(){
