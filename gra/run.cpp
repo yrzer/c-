@@ -3,22 +3,14 @@
 #include <stdlib.h>
 #include <ctime> // dodaje nam rand() i srand () 
 #include <Windows.h> // dodaje nam opóźnienie
-<<<<<<< HEAD
-=======
 
->>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 using namespace std;
 
 // globalne zmienne
 int liczba_graczy;
-<<<<<<< HEAD
-int z_rzut[4][8]; // rzuty kostką [4]- gracze ; [6]-rundy, [7]-wygrane rundy
-string player[4]; // zapisywanie graczy
-=======
 int z_rzut[4][7]; // [4]- liczba graczy; [6]-rundy, [7]-wygrane rundy
 string player[4]; // zapisywanie graczy
 
->>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 int rzut_k() // funkcja rzucenia kostką 
 {    
 	int w_kostka;
@@ -174,18 +166,11 @@ void nick_player()
         cout << i+1 << " player = ";
         cin >> player[i];
     } // potwierdza liczbe i nicki graczy
-<<<<<<< HEAD
-    cout << "nicki: ";
-    for (int i = 0; i < liczba_graczy; i++){
-        cout << i+1 << "  player = ";
-        cout << player[i] << " ";
-=======
     	cout << "nicki: ";
     	for (int i = 0; i < liczba_graczy; i++)
 			{
         	cout << i+1 << "  player = ";
         	cout << player[i] << " ";
->>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
     }
     cout << " \n";
 }
@@ -227,13 +212,10 @@ void koniec(){
 	}
 	else if (z_rzut[3][7] > z_rzut[1][7] && z_rzut[3][7] > z_rzut[2][7] && z_rzut[3][7] > z_rzut[0][7]) {
 		cout << "GRATULACJE GRACZU: " << player[3] << " WYGRAlEs";
-<<<<<<< HEAD
-=======
 	}
 
 	else {
 		cout << "PACANY, NIE MA ZWYCIĘSCY. JESTESCIE DO BANI";
->>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 	}
 }
 bool game_over(){
