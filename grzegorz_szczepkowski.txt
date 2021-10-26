@@ -511,3 +511,5 @@ int main()
     int wynik = 0;
     return game_over(wynik);
 }
+/// zad na lekcji 26.10.2021
+-- zrobic 10 klas postaci i 10 klas przciwników 
