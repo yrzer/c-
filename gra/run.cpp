@@ -3,11 +3,22 @@
 #include <stdlib.h>
 #include <ctime> // dodaje nam rand() i srand () 
 #include <Windows.h> // dodaje nam opóźnienie
+<<<<<<< HEAD
+=======
+
+>>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 using namespace std;
+
 // globalne zmienne
 int liczba_graczy;
+<<<<<<< HEAD
 int z_rzut[4][8]; // rzuty kostką [4]- gracze ; [6]-rundy, [7]-wygrane rundy
 string player[4]; // zapisywanie graczy
+=======
+int z_rzut[4][7]; // [4]- liczba graczy; [6]-rundy, [7]-wygrane rundy
+string player[4]; // zapisywanie graczy
+
+>>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 int rzut_k() // funkcja rzucenia kostką 
 {    
 	int w_kostka;
@@ -23,7 +34,8 @@ int rzut_k() // funkcja rzucenia kostką
     cout << "  suma - ";
     return wk_r_suma;
 }
-void wg_r(int r){
+void wg_r(int r)
+{
     if (z_rzut[0][r] > z_rzut[1][r] && z_rzut[0][r] > z_rzut[2][r] && z_rzut[0][r] > z_rzut[3][r]) {
 			cout << "wygral: " << player[0] << endl;
 			z_rzut[0][7] = z_rzut[0][7] + 1;
@@ -51,7 +63,8 @@ void s_r_g(int r,int i){// symulowanie rzutów graczy
     Sleep(500);
 Sleep(1000); // odczekanie sekundy
 }
-void sprawdzenie_if(int r){
+void sprawdzenie_if(int r) // uuu sprawdza czy nie było remisu
+{
     if (z_rzut[0][r] == z_rzut[1][r]) {
 			cout << "Remis " << player[0] << " miedzy " << player[1] << "\nGracze zaczynaja jeszcze raz" << endl;
 			cout << "rzuca gracz: " << player[0] << endl;
@@ -122,39 +135,57 @@ void sprawdzenie_if(int r){
 			cout << " ";
 		}
 }
-void rozgrywka() { 
-    for(int i = 0; i < 4; i++){z_rzut[i][7] = 0;}
-for(int r=1; r<7;r++){ // symulowanie rundy musi być 7 :) // specjalnie dałem 2 rundy bo za duża się wyświetla // specjalnie dałem 2 rundy bo za duża się wyświetla
- // r jaka runda 
- cout << "|| runda nr "<< r << " ||\n \n";
-Sleep(500);
-     for(int i=0; i<liczba_graczy;i++){// symulowanie rzutów graczy 
-        s_r_g(r,i); // symulowanie rzutów graczy
-        }//wykoneane rzutów graczy liczba_graczy
-        // uuu sprawdza czy nie było remisu
-        //zdefinowanie widmo
-        z_rzut[2][r] = 0;
-        z_rzut[3][r] = 1;
-    sprawdzenie_if(r);
-    // ^^^ sprawdza czy nie było remisu
-    // wygrane rundy
+void rozgrywka() 
+{ 
+    for(int i = 0; i < 4; i++)
+	{
+		z_rzut[i][7] = 0;
+	}	
+	if(liczba_graczy == 2) //zdefinowanie widmo
+	{
+		for(int r=1; r<7;r++) 
+		{
+  		z_rzut[2][r] = 1;
+        z_rzut[3][r] = 0;
+		}
+	};
+
+	for(int r=1; r<7;r++)
+	{
+ 		cout << "|| runda nr "<< r << " ||\n \n";
+		Sleep(500);
+     	for(int i=0; i<liczba_graczy;i++)
+		{
+        	s_r_g(r,i); // symulowanie rzutów graczy
+        }
+    
+    sprawdzenie_if(r); // sprawdza czy nie było remisu
     wg_r(r); // wygrana rundy
-    //----------------------
  cout << "\n";
 Sleep(2000); // odczekanie sekundy
 }
 
 }
-void nick_player(){// wpisywanie nicków garczy 
+void nick_player()
+	{ // wpisywanie nicków garczy 
     cout << "wpisz nicki: \n";
-    for (int i = 0; i < liczba_graczy; i++){
+    for (int i = 0; i < liczba_graczy; i++)
+	{
         cout << i+1 << " player = ";
         cin >> player[i];
     } // potwierdza liczbe i nicki graczy
+<<<<<<< HEAD
     cout << "nicki: ";
     for (int i = 0; i < liczba_graczy; i++){
         cout << i+1 << "  player = ";
         cout << player[i] << " ";
+=======
+    	cout << "nicki: ";
+    	for (int i = 0; i < liczba_graczy; i++)
+			{
+        	cout << i+1 << "  player = ";
+        	cout << player[i] << " ";
+>>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
     }
     cout << " \n";
 }
@@ -172,8 +203,6 @@ int p_l_g(){ // liczba graczy zmienna
 }
 void zasady() { // zasady gry
     cout << " Gracz z najwyzsza suma punktow - wygrywa runde \n ilosc round - 6 // specjalnie dałem 2 rundy bo za duża się wyświetla \n remis w rundzie - powtarzanie rundy tylko remisowych \n Zasady - \n Gracz ktory uzyska szostke na obu kostkach ma  mozliwosc dodatkowego rzutu  koscmi w tej samej rundzie i dodaje do calego wyniku z rundy \n Gracz ktoremu na obu kostkach wypadnie wynik parzysty moze dodac + 1 do wyniku \n Gracz ktoremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktow  \n  \n \n";}
-void w_t_p() { // wytłumaczenie tabeli player
-    cout << "tabela zrobiona jako pokaz zrobiona zmiennej player tu akurat na 3 graczy na 8 miejsc\n0 123456 7 \n0 123456 7 \n0 123456 7 \n0 - gracz i enterów jest 2-4 \n1-6 - rundy i zapisane wyniki graczy (w karzdej rundzie osobny  wynik(- suma wyrzuconych oczek w dwóch kostkach))\n7 - suma wygranych rund w X obok siebie\n // specjalnie dałem 2 rundy bo za duża się wyświetla\n";}
 void autorzy() { // informacje na temat autorów
     cout << "\n zespol Timon i Pumba company \n czlonkowie: \n Timon - kosiara2015 (Bartek Zebrowski) \n Pumba - yrzer (Grzegorz Szczepkowski) \n  \n "<< endl;}
 void koniec(){
@@ -198,6 +227,13 @@ void koniec(){
 	}
 	else if (z_rzut[3][7] > z_rzut[1][7] && z_rzut[3][7] > z_rzut[2][7] && z_rzut[3][7] > z_rzut[0][7]) {
 		cout << "GRATULACJE GRACZU: " << player[3] << " WYGRAlEs";
+<<<<<<< HEAD
+=======
+	}
+
+	else {
+		cout << "PACANY, NIE MA ZWYCIĘSCY. JESTESCIE DO BANI";
+>>>>>>> a17e875b40e35218e2b6d4c24ed002a5b0d29381
 	}
 }
 bool game_over(){
@@ -217,43 +253,43 @@ bool game_over(){
                 break;
     }
 }
-int main(){ // działanie gry
-    cout << "-- gra kosciana :D || play:1 | zasady:2 | autorzy:3 | ?:4 || --\n   liczba: ";
-    int menu;
-    cin >> menu;
-    switch (menu)
-    {
-    case 1:
-        cout << " start \n";
-        liczba_graczy = p_l_g(); // podaj liczbe graczy
-        nick_player(); // zapisywanie nicków graczy
-        Sleep(1000); // odczekanie sekundy
-        rozgrywka();  // rozgrywka
-        // specjalnie dałem 2 rundy bo za duża się wyświetla
-        koniec();
-        Sleep(1000); // odczekanie sekundy
-    if(game_over() == 0){
-        main();
-    }
-    else{return 0;};
-        break;
-    case 2:
-        zasady();
-        main();
-        break;
-    case 3:
-        autorzy();
-        main();
-        break;
-    case 4:
-        w_t_p();
-        main();
-        break;
-    default:
-        cout << " error \n";
-        return main();
-        break;
-    } 
-cout<<"syntax error";
+int main()
+	{ // działanie gry
+    	cout << "-- gra kosciana :D || play:1 | zasady:2 | autorzy:3 || --\n   liczba: ";
+    	int menu;
+    	cin >> menu;
+    	switch (menu)
+    	{
+   		case 1:
+        	cout << " start \n";
+        	liczba_graczy = p_l_g(); // podaj liczbe graczy
+        	nick_player(); // zapisywanie nicków graczy
+        	Sleep(1000); // odczekanie sekundy
+        	rozgrywka();  // rozgrywka
+        	// specjalnie dałem 2 rundy bo za duża się wyświetla
+        	koniec();
+        	Sleep(1000); // odczekanie sekundy
+    		if(game_over() == 0){
+        	main();
+    	}
+    	else
+		{
+			return 0;
+		};
+        	break;
+    	case 2:
+        	zasady();
+        	main();
+        	break;
+    	case 3:
+        	autorzy();
+        	main();
+        	break;
+    	default:
+        	cout << " error \n";
+        	return main();
+        	break;
+    	} 
+	cout<<"syntax error";
 return main();
 }
