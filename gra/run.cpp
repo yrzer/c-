@@ -182,7 +182,7 @@ int p_l_g(){ // liczba graczy zmienna
             return liczba_graczy;
 	    }
 	else{
-	        cout << "NO TY CHYBA SOBIE JAJA ROBISZ, NIE GRASZ ZDRADZIECKA KURWO \n";
+	        cout << "prosze ciebie, wpisz inna liczbe \n";
             return p_l_g();
     }
 }
