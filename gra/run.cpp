@@ -187,7 +187,7 @@ int p_l_g(){ // liczba graczy zmienna
     }
 }
 void zasady() { // zasady gry
-    cout << " Gracz z najwyzsza suma punktow - wygrywa runde \n ilosc round - 6 // specjalnie dałem 2 rundy bo za duża się wyświetla \n remis w rundzie - powtarzanie rundy tylko remisowych \n Zasady - \n Gracz ktory uzyska szostke na obu kostkach ma  mozliwosc dodatkowego rzutu  koscmi w tej samej rundzie i dodaje do calego wyniku z rundy \n Gracz ktoremu na obu kostkach wypadnie wynik parzysty moze dodac + 1 do wyniku \n Gracz ktoremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktow  \n  \n \n";}
+    cout << " Gracz z najwyzsza suma punktow - wygrywa runde \n ilosc round - 6 \n remis w rundzie - powtarzanie rundy tylko remisowych \n Zasady - \n Gracz ktory uzyska szostke na obu kostkach ma  mozliwosc dodatkowego rzutu  koscmi w tej samej rundzie i dodaje do calego wyniku z rundy \n Gracz ktoremu na obu kostkach wypadnie wynik parzysty moze dodac + 1 do wyniku \n Gracz ktoremu wypadną dwie jedynki otrzymuje w tej rundzie 0 punktow  \n  \n \n";}
 void autorzy() { // informacje na temat autorów
     cout << "\n zespol Timon i Pumba company \n czlonkowie: \n Timon - kosiara2015 (Bartek Zebrowski) \n Pumba - yrzer (Grzegorz Szczepkowski) \n  \n "<< endl;}
 void koniec(){
@@ -248,7 +248,6 @@ int main()
         	nick_player(); // zapisywanie nicków graczy
         	Sleep(1000); // odczekanie sekundy
         	rozgrywka();  // rozgrywka
-        	// specjalnie dałem 2 rundy bo za duża się wyświetla
         	koniec();
         	Sleep(1000); // odczekanie sekundy
     		if(game_over() == 0){
