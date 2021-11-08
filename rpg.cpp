@@ -2,14 +2,13 @@
 #include <string>
 
 using namespace std;
-struct klass
-{
+struct klass_p{ // player
 int hp;
 int dmg;
 int def;
 int speed;
-int mana;
-int lvl;
+int mana; // nie potzrebne teraz
+int lvl; // nie potzrebne teraz
 int fireball(){
     cout << "fireball" << endl;
     dmg = dmg*3*lvl;
@@ -20,15 +19,37 @@ int heal(){
     hp = hp+3*lvl*def;
     return hp;
 }
-int tarcza(){
-    cout << "tarcza" << endl;
-    def = 3*lvl*def;
+int energetyk(){
+    cout << "energetyk" << endl;
+    speed = 0.7*lvl*def;
+    // hp -
+    return hp;
+}};
+struct klass_e{ // enemy
+int hp;
+int dmg;
+int def;
+int speed;
+int lvl; // nie potzrebne teraz
+int range; // nie potzrebne teraz
+int fireball(){
+    cout << "fireball" << endl;
+    dmg = dmg*3*lvl;
+    return dmg;
+}
+int energetyk(){
+    cout << "energetyk" << endl;
+    hp = hp+3*lvl*def;
     return hp;
 }
-
-};
+int freez(){
+    cout << "shees" << endl;
+    def = 3*lvl*def;
+    return hp;
+}};
 int main(){
-    klass tank = {
+    // gracze klassy
+    klass_p tank = {
     300,
     150,
     300,
@@ -36,7 +57,7 @@ int main(){
     15,
     1,
     };
-    klass ninja = {
+    klass_p ninja = {
         100,
     150,
     200,
@@ -44,7 +65,7 @@ int main(){
     50,
     1,
     };
-    klass czarodziej = {
+    klass_p czarodziej = {
         100,
     50,
     70,
@@ -52,10 +73,66 @@ int main(){
     300,
     1,
     };
-    
+    // gracze klassy przciwnnicy
+    klass_e golem = {
+    200,
+    150,
+    200,
+    50,
+    15,
+    1,
+    };
+    klass_e pion = {
+    100,
+    150,
+    200,
+    200,
+    50,
+    1,
+    };
+    klass_e czarno_ksieznik = {
+    100,
+    50,
+    70,
+    150,
+    200,
+    1,
+    };
+
+    cout << "zacznij 1 " << endl;
+
+    int atak = 0;
+    int wybor;
+    cin >> wybor;
+    do {
+        switch (wybor)
+        {
+        case 1:
+             atak = tank.fireball();
+            tank.hp -= atak;
+            cout << "pion atakuje fireball zadając " << atak << " Gargulcowi; HP tank" << tank.hp << endl;
+            break;
+        default:
+            break;
+        }
+        int los = 1;
+        switch (los) {
+        case 1:
+             atak = pion.fireball();
+            pion.hp -= atak;
+            cout << "tank atakuje firebal zadając " << atak << "pionowi; HP piona" << pion.hp << endl;
+            break;
+        default:
+            break;
+        }
+
+ 
+
+    } while (pion.hp > 0 && tank.hp > 0);
 
     return( 0 );
 }
+// można zobić wielką gre jako szachy jako rpg tekstową
 /*
 // zadanie.gra
 #include <iostream> // nagłówek potrzebny do wprowadzenia jakiś danych 
