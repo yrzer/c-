@@ -19,15 +19,20 @@ int fireball(){
     dmg = dmg*0.003*speed;
     return dmg;
 }
+int z_policzkowanie(){
+    cout << "plaskacz" << endl;
+    dmg = (0.5*speed*dmg)*0.002;
+    return dmg;
+}
 int heal(){
-    cout << "leczenie" << endl;
-    hp = hp+0.003*lvl*def;
+    cout << "leczenie" ;
+    hp = hp+0.015*lvl*def;
+    cout << " = " << hp << endl;
     return hp;
 }
 int energetyk(){
     cout << "energetyk" << endl;
-    speed = 0.007*lvl*def;
-    // hp -
+    speed = 0.017*lvl*def;
     return hp;
 }};
 struct klass_e{ // enemy
@@ -39,7 +44,7 @@ int lvl; // nie potzrebne teraz
 int range; // nie potzrebne teraz
 int scratching(){
     cout << "scratching" << endl;
-    dmg = dmg*0.003*lvl;
+    dmg = dmg*0.004*lvl;
     return dmg;
 }
 int energetyk(){
@@ -52,8 +57,8 @@ int freez(){
     def = 0.003*lvl*def;
     return hp;
 }};
-int main(){
-    // gracze klassy
+
+ // gracze klassy
     klass_p tank = {
     300,
     150,
@@ -104,24 +109,28 @@ int main(){
     1,
     };
 
+int main(){
+   cout << "start gry\n\n" ;
     int atak_e,atak_p;
     int wybor;
     
     do {
         atak_e = 0;atak_p = 0;
-        cout << "wybiez atak 1,2,3 = " ;
+        cout << "wybiez atak 0,1,2,3 = " ;
         cin >> wybor;
         switch (wybor)
         {
         default: //case 1;
-             atak_p = tank.fireball();  break;
+            atak_p = tank.z_policzkowanie();  break;
+        case 1:
+            atak_p = tank.fireball();  break;
         case 2:
             tank.hp = tank.heal();  break;
         case 3:
             tank.speed = tank.energetyk();  break;
         };
         pion.hp -= atak_p;
-        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona" << pion.hp << endl;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona " << pion.hp << endl;
     Sleep(1000);
         switch (1) {
         case 1:
@@ -131,7 +140,7 @@ int main(){
             break;
         }
         tank.hp -= atak_e;
-        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP piona" << pion.hp << endl;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP tank " << tank.hp << endl;
  
 
     } while (pion.hp > 0 && tank.hp > 0);
