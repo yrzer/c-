@@ -1,7 +1,12 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
+int los_atak(){
+
+return 1;
+};
 struct klass_p{ // player
 int hp;
 int dmg;
@@ -11,17 +16,17 @@ int mana; // nie potzrebne teraz
 int lvl; // nie potzrebne teraz
 int fireball(){
     cout << "fireball" << endl;
-    dmg = dmg*3*lvl;
+    dmg = dmg*0.003*speed;
     return dmg;
 }
 int heal(){
     cout << "leczenie" << endl;
-    hp = hp+3*lvl*def;
+    hp = hp+0.003*lvl*def;
     return hp;
 }
 int energetyk(){
     cout << "energetyk" << endl;
-    speed = 0.7*lvl*def;
+    speed = 0.007*lvl*def;
     // hp -
     return hp;
 }};
@@ -32,19 +37,19 @@ int def;
 int speed;
 int lvl; // nie potzrebne teraz
 int range; // nie potzrebne teraz
-int fireball(){
-    cout << "fireball" << endl;
-    dmg = dmg*3*lvl;
+int scratching(){
+    cout << "scratching" << endl;
+    dmg = dmg*0.003*lvl;
     return dmg;
 }
 int energetyk(){
     cout << "energetyk" << endl;
-    hp = hp+3*lvl*def;
+    hp = hp+0.003*lvl*def;
     return hp;
 }
 int freez(){
     cout << "shees" << endl;
-    def = 3*lvl*def;
+    def = 0.003*lvl*def;
     return hp;
 }};
 int main(){
@@ -99,33 +104,34 @@ int main(){
     1,
     };
 
-    cout << "zacznij 1 " << endl;
-
-    int atak = 0;
+    int atak_e,atak_p;
     int wybor;
-    cin >> wybor;
+    
     do {
+        atak_e = 0;atak_p = 0;
+        cout << "wybiez atak 1,2,3 = " ;
+        cin >> wybor;
         switch (wybor)
         {
+        default: //case 1;
+             atak_p = tank.fireball();  break;
+        case 2:
+            tank.hp = tank.heal();  break;
+        case 3:
+            tank.speed = tank.energetyk();  break;
+        };
+        pion.hp -= atak_p;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona" << pion.hp << endl;
+    Sleep(1000);
+        switch (1) {
         case 1:
-             atak = tank.fireball();
-            tank.hp -= atak;
-            cout << "pion atakuje fireball zadając " << atak << " Gargulcowi; HP tank" << tank.hp << endl;
-            break;
-        default:
+            atak_e = pion.scratching();  break;
+        case 2:
+            
             break;
         }
-        int los = 1;
-        switch (los) {
-        case 1:
-             atak = pion.fireball();
-            pion.hp -= atak;
-            cout << "tank atakuje firebal zadając " << atak << "pionowi; HP piona" << pion.hp << endl;
-            break;
-        default:
-            break;
-        }
-
+        tank.hp -= atak_e;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP piona" << pion.hp << endl;
  
 
     } while (pion.hp > 0 && tank.hp > 0);
