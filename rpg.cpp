@@ -1,12 +1,20 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <stdlib.h>
+#include <time.h>  
+
+int chwilowe;
+
+
 
 using namespace std;
 int los_atak(){
-
-return 1;
+     srand (time(NULL));
+    chwilowe = rand() % 4 + 1;
+return chwilowe;
 };
+
 struct klass_p{ // player
 int hp;
 int dmg;
@@ -16,24 +24,22 @@ int mana; // nie potzrebne teraz
 int lvl; // nie potzrebne teraz
 int fireball(){
     cout << "fireball" << endl;
-    dmg = dmg*0.003*speed;
-    return dmg;
+    return (dmg*0.003*speed);
 }
 int z_policzkowanie(){
     cout << "plaskacz" << endl;
-    dmg = (0.5*speed*dmg)*0.002;
-    return dmg;
+    return ((0.5*speed*dmg)*0.033);
 }
 int heal(){
+    chwilowe = 0;
     cout << "leczenie" ;
-    hp = hp+0.015*lvl*def;
-    cout << " = " << hp << endl;
-    return hp;
+    chwilowe = hp+0.015*lvl*def;
+    cout << " = " << chwilowe << endl;
+    return chwilowe;
 }
 int energetyk(){
-    cout << "energetyk" << endl;
-    speed = 0.017*lvl*def;
-    return hp;
+    cout << "energetyk - BOOST!" << endl;
+    return (0.017*lvl*def);
 }};
 struct klass_e{ // enemy
 int hp;
@@ -44,20 +50,25 @@ int lvl; // nie potzrebne teraz
 int range; // nie potzrebne teraz
 int scratching(){
     cout << "scratching" << endl;
-    dmg = dmg*0.004*lvl;
-    return dmg;
+    return (dmg*0.004*lvl);
 }
-int energetyk(){
-    cout << "energetyk" << endl;
-    hp = hp+0.003*lvl*def;
-    return hp;
+int radiation(){
+    cout << "uran - leczenie" << endl;
+    return (hp+0.003*lvl*def);
 }
 int freez(){
-    cout << "shees" << endl;
-    def = 0.003*lvl*def;
-    return hp;
-}};
+    cout << "sheesh!" << endl;
+    return (0.003*lvl*def);
+}
+int miss(){
+    cout << "miss" << endl;
+    return 0;
+}
 
+};
+
+ // gracz każdy
+klass_p gracz;
  // gracze klassy
     klass_p tank = {
     300,
@@ -110,40 +121,56 @@ int freez(){
     };
 
 int main(){
-   cout << "start gry\n\n" ;
+     cout << "start gry\n" ;
     int atak_e,atak_p;
     int wybor;
+
+    cout << "1= tank | 2= ninja | 3= czarodziej" ;
+    cout << "\nwybiez klase 1,2,3 = " ;
+    switch (wybor)
+    {
+    case 1:
+        gracz = tank;
+        break;
     
+    default:
+        break;
+    }
+    wybor =0;
     do {
         atak_e = 0;atak_p = 0;
-        cout << "wybiez atak 0,1,2,3 = " ;
+        cout << "\nwybiez atak 0,1,2,3 = " ;
         cin >> wybor;
         switch (wybor)
         {
         default: //case 1;
-            atak_p = tank.z_policzkowanie();  break;
+            atak_p = gracz.z_policzkowanie();  break;
         case 1:
-            atak_p = tank.fireball();  break;
+            atak_p = gracz.fireball();  break;
         case 2:
-            tank.hp = tank.heal();  break;
+            gracz.hp = gracz.heal();  break;
         case 3:
-            tank.speed = tank.energetyk();  break;
+            gracz.speed = gracz.energetyk();  break;
         };
         pion.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona " << pion.hp << endl;
     Sleep(1000);
+    chwilowe = los_atak();
         switch (1) {
         case 1:
             atak_e = pion.scratching();  break;
         case 2:
-            
-            break;
+            pion.hp = pion.radiation(); break;
+        case 3:
+            pion.def = pion.freez(); break;
+            case 4:
+            atak_e = pion.miss();  break;
         }
-        tank.hp -= atak_e;
-        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP tank " << tank.hp << endl;
+        gracz.hp -= atak_e;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
  
 
-    } while (pion.hp > 0 && tank.hp > 0);
+    } while (pion.hp > 0 && gracz.hp > 0);
 
     return( 0 );
 }
