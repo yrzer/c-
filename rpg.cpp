@@ -6,8 +6,6 @@
 
 int chwilowe;
 
-
-
 using namespace std;
 int los_atak(){
      srand (time(NULL));
@@ -120,27 +118,33 @@ klass_p gracz;
     1,
     };
 
-int main(){
-     cout << "start gry\n" ;
-    int atak_e,atak_p;
-    int wybor;
 
+void klassa_postaci(){
+        int wybor=0;
     cout << "1= tank | 2= ninja | 3= czarodziej" ;
-    cout << "\nwybiez klase 1,2,3 = " ;
+    cout << "\nwybiez klase 1,2,3 = " ; cin >> wybor;
     switch (wybor)
     {
     case 1:
         gracz = tank;
         break;
-    
+    case 2:
+        gracz = ninja;
+        break;
+    case 3:
+        gracz = czarodziej;
+        break;
     default:
+    cout << "\n error\n" ;
+    klassa_postaci();
         break;
     }
-    wybor =0;
-    do {
+}
+void ruch_1_p(){
+        int wybor,atak_e,atak_p;
+    cout << "\nwybiez atak 0,1,2,3 = " ;
         atak_e = 0;atak_p = 0;
-        cout << "\nwybiez atak 0,1,2,3 = " ;
-        cin >> wybor;
+    cin >> wybor;
         switch (wybor)
         {
         default: //case 1;
@@ -154,7 +158,10 @@ int main(){
         };
         pion.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona " << pion.hp << endl;
-    Sleep(1000);
+}
+void ruch_1_e(){
+    int wybor,atak_e,atak_p;
+        atak_e = 0;atak_p = 0;
     chwilowe = los_atak();
         switch (1) {
         case 1:
@@ -168,7 +175,46 @@ int main(){
         }
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
- 
+}
+
+int main(){
+     cout << "start gry\n" ;
+    int atak_e,atak_p;
+    int wybor=0;
+klassa_postaci();
+
+int plus_50_do_hp = gracz.hp;
+
+cout << "\n przciwnik pion !!! " ;
+    do {
+    ruch_1_p();
+    Sleep(1000);
+
+    if (pion.hp > 0 && gracz.hp > 0)
+    {
+        ruch_1_e();
+    }
+    else {
+        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+    };
+
+    } while (pion.hp > 0 && gracz.hp > 0);
+
+
+cout << "\n\n WYGRANNA !!! \n z pion \n następny przciwnik - GOLEM\n leczenie ! i + 50 do hp \n\n strat!\n" ;
+gracz.hp = plus_50_do_hp + 50;
+
+do {
+    ruch_1_p();
+    Sleep(1000);
+
+    if (pion.hp > 0 && gracz.hp > 0)
+    {
+        ruch_1_e();
+    }
+    else {
+        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+    };
 
     } while (pion.hp > 0 && gracz.hp > 0);
 
