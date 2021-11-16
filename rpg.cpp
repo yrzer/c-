@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -5,7 +6,7 @@
 #include <time.h>  
 
 int chwilowe;
-
+int atak_e,atak_p;
 using namespace std;
 int los_atak(){
      srand (time(NULL));
@@ -118,7 +119,7 @@ klass_p gracz;
     1,
     };
 
-
+// tutorial
 void klassa_postaci(){
         int wybor=0;
     cout << "1= tank | 2= ninja | 3= czarodziej" ;
@@ -141,7 +142,7 @@ void klassa_postaci(){
     }
 }
 void ruch_1_p(){
-        int wybor,atak_e,atak_p;
+    int wybor;
     cout << "\nwybiez atak 0,1,2,3 = " ;
         atak_e = 0;atak_p = 0;
     cin >> wybor;
@@ -156,11 +157,8 @@ void ruch_1_p(){
         case 3:
             gracz.speed = gracz.energetyk();  break;
         };
-        pion.hp -= atak_p;
-        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi; HP piona " << pion.hp << endl;
 }
 void ruch_1_e(){
-    int wybor,atak_e,atak_p;
         atak_e = 0;atak_p = 0;
     chwilowe = los_atak();
         switch (1) {
@@ -176,21 +174,50 @@ void ruch_1_e(){
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
 }
+void ruch_2_e(){
+        atak_e = 0;atak_p = 0;
+    chwilowe = los_atak();
+        switch (1) {
+        case 1:
+            atak_e = golem.scratching();  break;
+        case 2:
+            golem.hp = golem.radiation(); break;
+        case 3:
+            golem.def = golem.freez(); break;
+            case 4:
+            atak_e = golem.miss();  break;
+        }
+        gracz.hp -= atak_e;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
+}
+void ruch_3_e(){
+        atak_e = 0;atak_p = 0;
+    chwilowe = los_atak();
+        switch (1) {
+        case 1:
+            atak_e = czarno_ksieznik.scratching();  break;
+        case 2:
+           czarno_ksieznik.hp = czarno_ksieznik.radiation(); break;
+        case 3:
+            czarno_ksieznik.def = czarno_ksieznik.freez(); break;
+            case 4:
+            atak_e = czarno_ksieznik.miss();  break;
+        }
+        gracz.hp -= atak_e;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
+}
 
-int main(){
-     cout << "start gry\n" ;
-    int atak_e,atak_p;
-    int wybor=0;
-klassa_postaci();
-
+int tutorial(){
+    klassa_postaci();
 int plus_50_do_hp = gracz.hp;
-
 cout << "\n przciwnik pion !!! " ;
     do {
     ruch_1_p();
+    pion.hp -= atak_p;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
     Sleep(1000);
-
-    if (pion.hp > 0 && gracz.hp > 0)
+     cout << " HP przeciwnika " << pion.hp << endl;
+    if (pion.hp > 0)
     {
         ruch_1_e();
     }
@@ -199,26 +226,87 @@ cout << "\n przciwnik pion !!! " ;
     };
 
     } while (pion.hp > 0 && gracz.hp > 0);
-
-
+if(gracz.hp <= 0){
+     cout << "\nGAME OVER YOU DIE\n" ;
+    system("pause");
+    return 0;} 
 cout << "\n\n WYGRANNA !!! \n z pion \n następny przciwnik - GOLEM\n leczenie ! i + 50 do hp \n\n strat!\n" ;
 gracz.hp = plus_50_do_hp + 50;
-
 do {
     ruch_1_p();
+    golem.hp -= atak_p;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
     Sleep(1000);
-
-    if (pion.hp > 0 && gracz.hp > 0)
+     cout << " HP przeciwnika " << golem.hp << endl;
+    if (golem.hp > 0)
     {
-        ruch_1_e();
+        ruch_2_e();
     }
     else {
         cout << "\nprzciwnik umarł bo nie żyje\n" ;
     };
 
-    } while (pion.hp > 0 && gracz.hp > 0);
+    } while (golem.hp > 0 && gracz.hp > 0);
+    if(gracz.hp <= 0){
+     cout << "\nGAME OVER YOU DIE\n" ;
+    system("pause");
+    return 0;} 
+    cout << "\n\n WYGRANNA !!! \n z GOLEM \n następny przciwnik - czarno_ksieznik\n leczenie ! i + 50 do hp \n\n strat!\n" ;
+    gracz.hp = plus_50_do_hp + 100;
+do {
+    ruch_1_p();
+    czarno_ksieznik.hp -= atak_p;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
+    Sleep(1000);
+     cout << " HP przeciwnika " << czarno_ksieznik.hp << endl;
+    if (czarno_ksieznik.hp > 0)
+    {
+        ruch_3_e();
+    }
+    else {
+        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+    };
 
-    return( 0 );
+    } while (czarno_ksieznik.hp > 0 && gracz.hp > 0);
+    if(gracz.hp <= 0){
+     cout << "\nGAME OVER YOU DIE\n" ;
+    system("pause");
+    return 0;} 
+    cout << "\n\n WYGRANNA !!! \n przeszedłeś tutorial\n\n w strat wpisz liczbe 7\n" ;
+    return 1;
+}
+
+void autorzy(){
+    cout << " całą gre wykonał yrzer - grzegorz szczepkowski \nwszelkie prawa zastrzeżone" << endl;
+}
+// koniec tutoriala
+void main2(){
+cout << "przeszedłeś gre\n";
+}
+int main(){ // /////////////////// main
+    cout << " | 1:start gry | 2: autorzy |   \n" ;
+    
+    int wybor;
+    cin>>wybor;
+    switch (wybor)
+    {
+    case 2:
+        autorzy();
+        main();
+    case 7:
+        main2();
+        break;
+    default:
+        cout << "error\n";
+        main();
+    case 1:
+        int abc = tutorial();
+        if(abc==1){ main();}else{cout <<"\n";}
+        break;
+    }
+   
+   system("pause");
+   return 0;
 }
 // można zobić wielką gre jako szachy jako rpg tekstową
 /*
