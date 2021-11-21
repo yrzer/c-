@@ -1,0 +1,1 @@
+int wybor=0

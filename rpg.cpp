@@ -7,6 +7,7 @@
 
 int chwilowe;
 int atak_e,atak_p;
+string nazwa_boss = " BOSS ";
 using namespace std;
 int los_atak(){
      srand (time(NULL));
@@ -66,8 +67,9 @@ int miss(){
 
 };
 
- // gracz każdy
-klass_p gracz;
+ // gracz każdy i enemy
+    klass_p gracz;
+    klass_e enemy;
  // gracze klassy
     klass_p tank = {
     300,
@@ -117,6 +119,14 @@ klass_p gracz;
     150,
     200,
     1,
+    };
+    klass_e boss = {
+    200,
+    150,
+    120,
+    350,
+    250,
+    50,
     };
 
 // tutorial
@@ -280,11 +290,111 @@ void autorzy(){
     cout << " całą gre wykonał yrzer - grzegorz szczepkowski \nwszelkie prawa zastrzeżone" << endl;
 }
 // koniec tutoriala
+void ruch_p(){
+    int wybor;
+    cout << "\nwybiez atak 0,1,2,3 = " ;
+        atak_e = 0;atak_p = 0;
+    cin >> wybor;
+        switch (wybor)
+        {
+        default: //case 1;
+            atak_p = gracz.z_policzkowanie();  break;
+        case 1:
+            atak_p = gracz.fireball();  break;
+        case 2:
+            gracz.hp = gracz.heal()*3;  break;
+        case 3:
+            gracz.speed = gracz.energetyk();  break;
+        };
+}
+void ruch_e(){
+        atak_e = 0;atak_p = 0;
+        chwilowe = los_atak();
+        switch (1) {
+        case 1:
+            atak_e = enemy.scratching();  break;
+        case 2:
+            enemy.hp = enemy.radiation(); break;
+        case 3:
+            enemy.def = enemy.freez(); break;
+        case 4:
+            atak_e = enemy.miss();  break;
+        }
+        gracz.hp -= atak_e;
+        cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
+}
+void game_over(){
+ cout << "\nGAME OVER YOU DIE\n" ;
+ //wynik
+    system("pause");
+    main();
+}
+string klassa_enemy(){
+    int wybor=0;string nazwa;int i;
+    do{
+        i++;
+    wybor = los_atak();
+    } while (!(wybor == 4) && i<4);
+    switch (wybor)
+    {
+    case 1:
+        enemy = golem;
+        nazwa = " golem ";
+        break;
+    case 2:
+        enemy = pion;
+        nazwa = " pion ";
+        break;
+    case 3:
+        nazwa = " czarno_ksieznik ";
+        enemy = czarno_ksieznik;
+        break;
+    case 4:
+        nazwa = nazwa_boss;
+        enemy = boss;
+        break;
+    default:
+    cout << "\n error\n" ;
+    klassa_enemy();
+        break;
+    }
+    
+    return nazwa;
+}
 void main2(){
-cout << "przeszedłeś gre\n";
+cout << "\nStart prawdziwa rozgrywka z czystm kontem\n";
+    klassa_postaci();
+    int plus_50_do_hp = gracz.hp + 100; string przeciwnik_nazwa;
+    //
+    do {
+    przeciwnik_nazwa = klassa_enemy();
+    cout << "\n przciwnik"<<przeciwnik_nazwa<<" !!! \n" ;
+    do {
+        ruch_p();
+        enemy.hp -= atak_p;
+        cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
+    Sleep(1000);
+     cout << " HP przeciwnika " << enemy.hp << endl;
+    if (enemy.hp > 0)
+    {
+        ruch_e();//numer 1-10
+    }
+    else {
+        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+    };
+    
+    } while (enemy.hp > 0 && gracz.hp > 0);
+    if(gracz.hp <= 0){game_over();} //wynik
+    cout << "\n\n WYGRANNA !!! \n z "<< przeciwnik_nazwa <<" \n następny przciwnik - GOLEM\n leczenie !//do 2/3 życia\n" ;
+    if(plus_50_do_hp <= (gracz.hp/3)*2){
+    gracz.hp = plus_50_do_hp;}
+
+    } while (przeciwnik_nazwa == nazwa_boss);
+    cout<< "wygrałeś z bossem";
+    game_over();// wynik max
 }
 int main(){ // /////////////////// main
-    cout << " | 1:start gry | 2: autorzy |   \n" ;
+    cout << " | 1:start gry | 2: autorzy |              ?exit = alt + f4 \n" ;
     
     int wybor;
     cin>>wybor;
