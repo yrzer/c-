@@ -3,13 +3,14 @@
 #include <string>
 #include <windows.h>
 #include <stdlib.h>
-#include <time.h>  
-
-int chwilowe;
-int atak_e,atak_p;
-string nazwa_boss = " BOSS ";
+#include <time.h>
 using namespace std;
+int chwilowe;
+int atak_e,atak_p,wybor_l,score;
+string nazwa_boss = " !!! BOSS !!!";
+
 int los_atak(){
+    Sleep(9);
      srand (time(NULL));
     chwilowe = rand() % 4 + 1;
 return chwilowe;
@@ -282,7 +283,7 @@ do {
      cout << "\nGAME OVER YOU DIE\n" ;
     system("pause");
     return 0;} 
-    cout << "\n\n WYGRANNA !!! \n przeszedłeś tutorial\n\n w strat wpisz liczbe 7\n" ;
+    cout << "\n\n WYGRANNA !!! \n przeszedłeś tutorial\n\n w strat wpisz liczbe 7 /by grać w pełna gre\n" ;
     return 1;
 }
 
@@ -323,19 +324,26 @@ void ruch_e(){
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
 }
-void game_over(){
- cout << "\nGAME OVER YOU DIE\n" ;
- //wynik
+void game_over(int e){
+    if (e==1)
+    {
+         cout << "\nGAME OVER YOU DIE\n";
+    }else{
+        cout << "\nGAME OVER WYGRANA\n";
+    };
+    cout << "\ntwój wynik = "<< score<<endl;
+
+
     system("pause");
-    main();
+    exit(EXIT_SUCCESS);
 }
 string klassa_enemy(){
-    int wybor=0;string nazwa;int i;
-    do{
-        i++;
-    wybor = los_atak();
-    } while (!(wybor == 4) && i<4);
-    switch (wybor)
+    wybor_l=0;string nazwa;int i;
+    for(int i=1;i<4;){
+    wybor_l = los_atak();
+    i++;Sleep(1);
+    };
+    switch (wybor_l)
     {
     case 1:
         enemy = golem;
@@ -362,9 +370,9 @@ string klassa_enemy(){
     return nazwa;
 }
 void main2(){
-cout << "\nStart prawdziwa rozgrywka z czystm kontem\n";
+cout << "\nStart /prawdziwa rozgrywka z czystm kontem\n";
     klassa_postaci();
-    int plus_50_do_hp = gracz.hp + 100; string przeciwnik_nazwa;
+    int plus_50_do_hp = gracz.hp + 100; string przeciwnik_nazwa;int l_z_boss;int l_z_pn;
     //
     do {
     przeciwnik_nazwa = klassa_enemy();
@@ -384,14 +392,18 @@ cout << "\nStart prawdziwa rozgrywka z czystm kontem\n";
     };
     
     } while (enemy.hp > 0 && gracz.hp > 0);
-    if(gracz.hp <= 0){game_over();} //wynik
-    cout << "\n\n WYGRANNA !!! \n z "<< przeciwnik_nazwa <<" \n następny przciwnik - GOLEM\n leczenie !//do 2/3 życia\n" ;
-    if(plus_50_do_hp <= (gracz.hp/3)*2){
-    gracz.hp = plus_50_do_hp;}
-
-    } while (przeciwnik_nazwa == nazwa_boss);
+    
+    if(gracz.hp <= 0){game_over(1);}; //wynik
+    score = score + 10 + (wybor_l*10);    // runda 10 pk przciwnik pion 10 bo jeden
+    cout << "\n\n WYGRANNA !!! \n z "<< przeciwnik_nazwa <<"\n leczenie !//do 2/3 życia\n zwiększenie zycia o 25%" ;
+    plus_50_do_hp = plus_50_do_hp + plus_50_do_hp*0.25;
+    if(plus_50_do_hp <= (gracz.hp/3)*2){gracz.hp = plus_50_do_hp;}
+    l_z_boss = nazwa_boss.size();
+    l_z_pn = przeciwnik_nazwa.size();
+    } while (l_z_boss == l_z_pn);
     cout<< "wygrałeś z bossem";
-    game_over();// wynik max
+    score = score+50;    // runda 10 pk przciwnik pion 10 bo jeden
+    game_over(0);// wynik
 }
 int main(){ // /////////////////// main
     cout << " | 1:start gry | 2: autorzy |              ?exit = alt + f4 \n" ;

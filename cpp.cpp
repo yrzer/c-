@@ -15,14 +15,10 @@ return chwilowe;
 };
 
 int main(){
-int wybor=0;
-    for(int i=1;i<4;){
-    
-    wybor = los_atak();
-    cout << i <<" "<< wybor<<endl;
-    
-    i++;Sleep(1);
-    };
+string nazwa_boss = " czarno_ksieznik ";
+    int liczba_znakow = nazwa_boss.size();
+	
+	cout<<"Podany ciąg składa się z "<<liczba_znakow<<" znaków.";
     system("pause");
     return main();
 }
