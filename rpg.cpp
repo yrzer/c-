@@ -11,7 +11,6 @@ string nazwa_boss = " !!! BOSS !!!";
 
 int los_atak(){
     Sleep(9);
-     srand (time(NULL));
     chwilowe = rand() % 4 + 1;
 return chwilowe;
 };
@@ -68,7 +67,7 @@ int miss(){
 
 };
 
- // gracz każdy i enemy
+ // gracz kazdy i enemy
     klass_p gracz;
     klass_e enemy;
  // gracze klassy
@@ -134,7 +133,7 @@ int miss(){
 void klassa_postaci(){
         int wybor=0;
     cout << "1= tank | 2= ninja | 3= czarodziej" ;
-    cout << "\nwybiez klase 1,2,3 = " ; cin >> wybor;
+    cout << "\n-- wybiez klase 1,2,3 = " ; cin >> wybor;
     switch (wybor)
     {
     case 1:
@@ -154,7 +153,7 @@ void klassa_postaci(){
 }
 void ruch_1_p(){
     int wybor;
-    cout << "\nwybiez atak 0,1,2,3 = " ;
+    cout << "\n-- wybiez atak 0,1,2,3 = " ;
         atak_e = 0;atak_p = 0;
     cin >> wybor;
         switch (wybor)
@@ -171,48 +170,51 @@ void ruch_1_p(){
 }
 void ruch_1_e(){
         atak_e = 0;atak_p = 0;
+         srand (time(NULL));
     chwilowe = los_atak();
         switch (1) {
         case 1:
-            atak_e = pion.scratching();  break;
+            atak_e = enemy.scratching();  break;
         case 2:
-            pion.hp = pion.radiation(); break;
+            enemy.hp = enemy.radiation(); break;
         case 3:
-            pion.def = pion.freez(); break;
+            enemy.def = enemy.freez(); break;
             case 4:
-            atak_e = pion.miss();  break;
+            atak_e = enemy.miss();  break;
         }
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
 }
 void ruch_2_e(){
         atak_e = 0;atak_p = 0;
+         srand (time(NULL));
     chwilowe = los_atak();
         switch (1) {
         case 1:
-            atak_e = golem.scratching();  break;
+            atak_e = enemy.scratching();  break;
         case 2:
-            golem.hp = golem.radiation(); break;
+            enemy.hp = enemy.radiation(); break;
         case 3:
-            golem.def = golem.freez(); break;
+            enemy.def = enemy.freez(); break;
             case 4:
-            atak_e = golem.miss();  break;
+            atak_e = enemy.miss();  break;
         }
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
 }
 void ruch_3_e(){
         atak_e = 0;atak_p = 0;
+         srand (time(NULL));
     chwilowe = los_atak();
         switch (1) {
         case 1:
-            atak_e = czarno_ksieznik.scratching();  break;
+            atak_e = enemy.scratching();  break;
         case 2:
-           czarno_ksieznik.hp = czarno_ksieznik.radiation(); break;
+           enemy.hp = enemy.radiation(); break;
         case 3:
-            czarno_ksieznik.def = czarno_ksieznik.freez(); break;
+            enemy.def = enemy.freez(); break;
             case 4:
-            atak_e = czarno_ksieznik.miss();  break;
+            atak_e = enemy.miss();  break;
         }
         gracz.hp -= atak_e;
         cout << "przciwnik atakuje zadajac " << atak_e << " hp graczowi; HP gracz " << gracz.hp << endl;
@@ -222,78 +224,83 @@ int tutorial(){
     klassa_postaci();
 int plus_50_do_hp = gracz.hp;
 cout << "\n przciwnik pion !!! " ;
+enemy = pion;
     do {
     ruch_1_p();
-    pion.hp -= atak_p;
+    enemy.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
     Sleep(1000);
-     cout << " HP przeciwnika " << pion.hp << endl;
-    if (pion.hp > 0)
+     cout << " HP przeciwnika " << enemy.hp << endl;
+    if (enemy.hp > 0)
     {
         ruch_1_e();
     }
     else {
-        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+        cout << "\nprzciwnik umarl bo nie zyje\n" ;
     };
 
-    } while (pion.hp > 0 && gracz.hp > 0);
+    } while (enemy.hp > 0 && gracz.hp > 0);
 if(gracz.hp <= 0){
      cout << "\nGAME OVER YOU DIE\n" ;
     system("pause");
     return 0;} 
-cout << "\n\n WYGRANNA !!! \n z pion \n następny przciwnik - GOLEM\n leczenie ! i + 50 do hp \n\n strat!\n" ;
+cout << "\n\n WYGRANNA !!! \n z pion \n nastepny przciwnik - GOLEM\n leczenie ! i + 50 do hp \n\n strat!\n" ;
 gracz.hp = plus_50_do_hp + 50;
+enemy = golem;
 do {
     ruch_1_p();
-    golem.hp -= atak_p;
+    enemy.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
     Sleep(1000);
-     cout << " HP przeciwnika " << golem.hp << endl;
-    if (golem.hp > 0)
+     cout << " HP przeciwnika " << enemy.hp << endl;
+    if (enemy.hp > 0)
     {
         ruch_2_e();
     }
     else {
-        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+        cout << "\nprzciwnik umarl bo nie zyje\n" ;
     };
 
-    } while (golem.hp > 0 && gracz.hp > 0);
+    } while (enemy.hp > 0 && gracz.hp > 0);
     if(gracz.hp <= 0){
      cout << "\nGAME OVER YOU DIE\n" ;
     system("pause");
     return 0;} 
-    cout << "\n\n WYGRANNA !!! \n z GOLEM \n następny przciwnik - czarno_ksieznik\n leczenie ! i + 50 do hp \n\n strat!\n" ;
+    cout << "\n\n WYGRANNA !!! \n z GOLEM \n nastepny przciwnik - czarno_ksieznik\n leczenie ! i + 50 do hp \n\n strat!\n" ;
     gracz.hp = plus_50_do_hp + 100;
+    enemy = czarno_ksieznik;
 do {
     ruch_1_p();
-    czarno_ksieznik.hp -= atak_p;
+    enemy.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
     Sleep(1000);
-     cout << " HP przeciwnika " << czarno_ksieznik.hp << endl;
-    if (czarno_ksieznik.hp > 0)
+     cout << " HP przeciwnika " << enemy.hp << endl;
+    if (enemy.hp > 0)
     {
         ruch_3_e();
     }
     else {
-        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+        cout << "\nprzciwnik umarl bo nie zyje\n" ;
     };
 
-    } while (czarno_ksieznik.hp > 0 && gracz.hp > 0);
+    } while (enemy.hp > 0 && gracz.hp > 0);
     if(gracz.hp <= 0){
      cout << "\nGAME OVER YOU DIE\n" ;
     system("pause");
-    return 0;} 
-    cout << "\n\n WYGRANNA !!! \n przeszedłeś tutorial\n\n w strat wpisz liczbe 7 /by grać w pełna gre\n" ;
+    return 0;}
+    cout << "\n\n WYGRANNA !!! \n przeszedles tutorial\n\n w strat wpisz liczbe 7 /by grac w pelna gre\n" ;
+    system("pause"); system("cls"); 
+    cout << "\n\n WYGRANNA !!! \n przeszedles tutorial\n\n w strat wpisz liczbe 7 /by grac w pelna gre\n" ;
     return 1;
 }
 
 void autorzy(){
-    cout << " całą gre wykonał yrzer - grzegorz szczepkowski \nwszelkie prawa zastrzeżone" << endl;
+    cout << " cala gre wykonal yrzer - grzegorz szczepkowski \nwszelkie prawa zastrzezone" << endl;
 }
 // koniec tutoriala
 void ruch_p(){
     int wybor;
-    cout << "\nwybiez atak 0,1,2,3 = " ;
+    cout << "\n-- wybiez atak 0,1,2,3 = " ;
         atak_e = 0;atak_p = 0;
     cin >> wybor;
         switch (wybor)
@@ -310,8 +317,9 @@ void ruch_p(){
 }
 void ruch_e(){
         atak_e = 0;atak_p = 0;
+         srand (time(NULL));
         chwilowe = los_atak();
-        switch (1) {
+        switch (chwilowe) {
         case 1:
             atak_e = enemy.scratching();  break;
         case 2:
@@ -331,18 +339,21 @@ void game_over(int e){
     }else{
         cout << "\nGAME OVER WYGRANA\n";
     };
-    cout << "\ntwój wynik = "<< score<<endl;
+    cout << "\ntwoj wynik = "<< score<<endl;
 
 
     system("pause");
     exit(EXIT_SUCCESS);
 }
 string klassa_enemy(){
-    wybor_l=0;string nazwa;int i;
-    for(int i=1;i<4;){
+    wybor_l=0;string nazwa;int ile = 3;
+    do{
+    srand(time(NULL));
     wybor_l = los_atak();
-    i++;Sleep(1);
-    };
+    Sleep(1);
+    ile--;
+    }while (wybor_l == 4 && ile > 0);
+    
     switch (wybor_l)
     {
     case 1:
@@ -381,32 +392,31 @@ cout << "\nStart /prawdziwa rozgrywka z czystm kontem\n";
         ruch_p();
         enemy.hp -= atak_p;
         cout << "garcz atakuje zadajac " << atak_p << " hp przeciwnikowi;";
-    Sleep(1000);
-     cout << " HP przeciwnika " << enemy.hp << endl;
+        cout << " HP przeciwnika " << enemy.hp << endl;
+     Sleep(1000);
     if (enemy.hp > 0)
     {
         ruch_e();//numer 1-10
     }
     else {
-        cout << "\nprzciwnik umarł bo nie żyje\n" ;
+        cout << "\nprzciwnik umarl bo nie zyje\n" ;
     };
-    
     } while (enemy.hp > 0 && gracz.hp > 0);
     
     if(gracz.hp <= 0){game_over(1);}; //wynik
     score = score + 10 + (wybor_l*10);    // runda 10 pk przciwnik pion 10 bo jeden
-    cout << "\n\n WYGRANNA !!! \n z "<< przeciwnik_nazwa <<"\n leczenie !//do 2/3 życia\n zwiększenie zycia o 25%" ;
+    cout << "\n\n WYGRANNA !!! \n z "<< przeciwnik_nazwa <<"\n leczenie !    // do 2/3 zycia\n zwiekszenie zycia o 25% \n" ;
     plus_50_do_hp = plus_50_do_hp + plus_50_do_hp*0.25;
     if(plus_50_do_hp <= (gracz.hp/3)*2){gracz.hp = plus_50_do_hp;}
     l_z_boss = nazwa_boss.size();
     l_z_pn = przeciwnik_nazwa.size();
-    } while (l_z_boss == l_z_pn);
-    cout<< "wygrałeś z bossem";
+    } while (l_z_boss != l_z_pn);
+    cout<< "wygrales z bossem";
     score = score+50;    // runda 10 pk przciwnik pion 10 bo jeden
     game_over(0);// wynik
 }
 int main(){ // /////////////////// main
-    cout << " | 1:start gry | 2: autorzy |              ?exit = alt + f4 \n" ;
+    cout << " | 1:start gry | 2: autorzy |              ?exit = alt + f4 \n-- " ;
     
     int wybor;
     cin>>wybor;
@@ -430,132 +440,132 @@ int main(){ // /////////////////// main
    system("pause");
    return 0;
 }
-// można zobić wielką gre jako szachy jako rpg tekstową
+// mozna zobic wielka gre jako szachy jako rpg tekstowa
 /*
 // zadanie.gra
-#include <iostream> // nagłówek potrzebny do wprowadzenia jakiś danych 
+#include <iostream> // naglowek potrzebny do wprowadzenia jakis danych 
 #include <stdlib.h>
 #include <ctime> // dodaje nam rand() i srand () 
-#include <Windows.h> // dodaje nam opóźnienie
+#include <Windows.h> // dodaje nam opoznienie
 #include <conio.h>
 using namespace std;
 struct klass {//deklaracja struktury
-    int hp; // życie w 100% /zmienne
+    int hp; // zycie w 100% /zmienne
     int def; // obrona 100% /zmienne 
     int dbt; // durability 100% /zmienne
-    int strength; // siła w niutonach\% / np dbt*h*w*%\n
+    int strength; // sila w niutonach\% / np dbt*h*w*%\n
     int intelligence; // inteligencja
     int mana; //
     int magic; //
     int antymagic; //
-    int hight; // wysokość w metrach
+    int hight; // wysokosc w metrach
     int waga; // w kilogramach
-    int speed; // szybkość np chodzenia
-    int holnes; // świętość/duchowność
-    // int płeć
+    int speed; // szybkosc np chodzenia
+    int holnes; // swietosc/duchownosc
+    // int plec
 };
 int main(){
     // gracze
 	klass tank = {
-        70, // życie w 100% /zmienne
+        70, // zycie w 100% /zmienne
         60, // obrona 100% /zmienne 
         70, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(6/10), // siła w niutonach\% / np dbt*h*w*%\n
-        20, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(6/10), // sila w niutonach\% / np dbt*h*w*%\n
+        20, // inteligencja   /malo zmienne bardziej lvl
         10, // mana 
         2, // magic
         1, // anty magic
-        180, // wysokość w metrach /nie zminna
+        180, // wysokosc w metrach /nie zminna
         110, // waga w kg /nie zmienna
-        7, // szybkość np biegania W KH
-        2, // świętość/duchowność NA 100% /mało zmienna
+        7, // szybkosc np biegania W KH
+        2, // swietosc/duchownosc NA 100% /malo zmienna
     };
     klass magik = {
-        40, // życie w 100% magia zwiększa /zmienne
+        40, // zycie w 100% magia zwieksza /zmienne
         45, // obrona 100% /zmienne 
         55, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(2/10), // siła w niutonach\% / np dbt*h*w*%\n
-        70, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(2/10), // sila w niutonach\% / np dbt*h*w*%\n
+        70, // inteligencja   /malo zmienne bardziej lvl
         90, // mana 
         65, // magic
         35, // anty magic
-        166, // wysokość w metrach /nie zminna
+        166, // wysokosc w metrach /nie zminna
         68, // waga w kg /nie zmienna
-        8, // szybkość np biegania W KH
-        40, // świętość/duchowność NA 100% /mało zmienna
+        8, // szybkosc np biegania W KH
+        40, // swietosc/duchownosc NA 100% /malo zmienna
     };
     klass mroczny_magik = {
-        40, // życie w 100% magia zwiększa /zmienne
+        40, // zycie w 100% magia zwieksza /zmienne
         40, // obrona 100% /zmienne 
         60, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(2/10), // siła w niutonach\% / np dbt*h*w*%\n
-        70, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(2/10), // sila w niutonach\% / np dbt*h*w*%\n
+        70, // inteligencja   /malo zmienne bardziej lvl
         90, // mana 
         40, // magic
         65, // anty magic
-        165, // wysokość w metrach /nie zminna
+        165, // wysokosc w metrach /nie zminna
         70, // waga w kg /nie zmienna
-        7, // szybkość np biegania W KH
-        10, // świętość/duchowność NA 100% /mało zmienna
+        7, // szybkosc np biegania W KH
+        10, // swietosc/duchownosc NA 100% /malo zmienna
     };
     klass healer = {
-        50, // życie w 100% /zmienne
+        50, // zycie w 100% /zmienne
         35, // obrona 100% /zmienne 
         60, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(4/10), // siła w niutonach\% / np dbt*h*w*%\n
-        50, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(4/10), // sila w niutonach\% / np dbt*h*w*%\n
+        50, // inteligencja   /malo zmienne bardziej lvl
         65, // mana 
         30, // magic
         2, // anty magic
-        160, // wysokość w metrach /nie zminna
+        160, // wysokosc w metrach /nie zminna
         50, // waga w kg /nie zmienna
-        9, // szybkość np biegania W KH
-        60, // świętość/duchowność NA 100% /mało zmienna
+        9, // szybkosc np biegania W KH
+        60, // swietosc/duchownosc NA 100% /malo zmienna
     };
 
 
     // entity
     klass pionek = {
-        45, // życie w 100% /zmienne
+        45, // zycie w 100% /zmienne
         30, // obrona 100% /zmienne 
         35, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(5/10), // siła w niutonach\% / np dbt*h*w*%\n
-        10, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(5/10), // sila w niutonach\% / np dbt*h*w*%\n
+        10, // inteligencja   /malo zmienne bardziej lvl
         10, // mana 
         5, // magic
         5, // anty magic
-        120, // wysokość w metrach /nie zminna
+        120, // wysokosc w metrach /nie zminna
         40, // waga w kg /nie zmienna
-        9, // szybkość np biegania W KH
-        0, // świętość/duchowność NA 100% /mało zmienna
+        9, // szybkosc np biegania W KH
+        0, // swietosc/duchownosc NA 100% /malo zmienna
     };
     klass golem = {
-        65, // życie w 100% /zmienne
+        65, // zycie w 100% /zmienne
         50, // obrona 100% /zmienne 
         55, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(6/10), // siła w niutonach\% / np dbt*h*w*%\n
-        10, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(6/10), // sila w niutonach\% / np dbt*h*w*%\n
+        10, // inteligencja   /malo zmienne bardziej lvl
         30, // mana 
         5, // magic
         25, // anty magic
-        220, // wysokość w metrach /nie zminna
+        220, // wysokosc w metrach /nie zminna
         180, // waga w kg /nie zmienna
-        6, // szybkość np biegania W KH
-        0, // świętość/duchowność NA 100% /mało zmienna
+        6, // szybkosc np biegania W KH
+        0, // swietosc/duchownosc NA 100% /malo zmienna
     };
-    klass czarno_księżnik = {
-        40, // życie w 100% magia zwiększa /zmienne
+    klass czarno_ksieznik = {
+        40, // zycie w 100% magia zwieksza /zmienne
         40, // obrona 100% /zmienne 
         60, // durability 100% /zmienne
-        tank.dbt*tank.hight*tank.waga*(2/10), // siła w niutonach\% / np dbt*h*w*%\n
-        70, // inteligencja   /mało zmienne bardziej lvl
+        tank.dbt*tank.hight*tank.waga*(2/10), // sila w niutonach\% / np dbt*h*w*%\n
+        70, // inteligencja   /malo zmienne bardziej lvl
         90, // mana 
         40, // magic
         65, // anty magic
-        165, // wysokość w metrach /nie zminna
+        165, // wysokosc w metrach /nie zminna
         70, // waga w kg /nie zmienna
-        7, // szybkość np biegania W KH
-        10, // świętość/duchowność NA 100% /mało zmienna
+        7, // szybkosc np biegania W KH
+        10, // swietosc/duchownosc NA 100% /malo zmienna
     };
 return main();
 }

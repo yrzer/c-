@@ -6,19 +6,24 @@
 #include <time.h>  
 using namespace std;
 int chwilowe;
-
+int l=100;
 int los_atak(){
-    Sleep(100);
-     srand(time(NULL));
-    chwilowe = rand() % 4 + 1;
+    Sleep(1);
+    
+    chwilowe = rand() % 10 + 1;
+cout << chwilowe << endl;
 return chwilowe;
 };
 
-int main(){
-string nazwa_boss = " czarno_ksieznik ";
-    int liczba_znakow = nazwa_boss.size();
-	
-	cout<<"Podany ciąg składa się z "<<liczba_znakow<<" znaków.";
+int main(){ 
+  int sum, suma; 
+  srand(time(NULL));
+    while (l>0){
+    suma = suma + los_atak();
+    l--;
+    sum++;
+    }
+    cout << sum << " " << suma << endl;
     system("pause");
     return main();
 }
