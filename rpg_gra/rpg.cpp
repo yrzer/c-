@@ -7,6 +7,7 @@
 using namespace std;
 int chwilowe;
 int atak_e,atak_p,wybor_l,score;
+double limit= 0.00014; 
 string nazwa_boss = " !!! -- BOSS -- !!!";
 
 int los_atak(int a){
@@ -19,7 +20,7 @@ void game_over(int e){
     {
          cout << "\nGAME OVER YOU DIE\n";
     }
-    if (e==2){
+    else if (e==2){
         cout << "\nGAME OVER YOU DIE\n";
       system("pause");
       exit(EXIT_SUCCESS);
@@ -39,34 +40,50 @@ int speed;
 int charyzma; // magia  "-" czarna
 int lvl; // jako losowanie kryta
 int id;// id of kalsa
-int k_lvl(){int a = los_atak(lvl); if(a>=5){a=a%7;}else{a=0;}; return (a*lvl);}
+int k_lvl(){int a = los_atak(lvl); if(a>=5){a=a%7;cout<<"krytyk\n";}else{a=0;}; return (a*lvl/25);}
 int yeet(){ // 0 admin
     cout << "yeet" << endl;
-    return (dmg*def*speed*charyzma*k_lvl());
+    return (dmg*def*speed*charyzma*limit);
 }
 int a_t(){ //atak fizyczny
     string s_a_t[4] = { {"z liscia"},{"kop w 4 litery"},{"prosty serpowy"},{"kop w klejnoty"}};
     cout << s_a_t[los_atak(4)-1] << endl; 
-    return (dmg*speed*k_lvl());};// deafult
+    return (dmg*speed*k_lvl()*limit*3);};// deafult
 int exorcyzm(){ // magik
     cout << "lorem ipsum" << endl; 
-    return (dmg*speed*charyzma*k_lvl());
+    return (dmg*speed*charyzma*k_lvl()*limit);
 }
 int opetanie(){ //n_magig
         cout << "kto pytal" << endl; 
-    return (dmg*speed*(charyzma*(-1))*k_lvl());
+    return (dmg*speed*(charyzma*(-1))*k_lvl()*limit);
 }
 int bow(){ 
     cout << " HOWKAY " << endl; 
-    return (speed*def*k_lvl());
+    return (speed*def*k_lvl()*limit);
 }
 int ruch_(){ 
     cout << " AAAAAAAAA! " << endl; 
-    return (speed*hp*k_lvl());
+    return (speed*hp*k_lvl()*limit);
 }
 int w_weapon(){ // bron
     cout << " dziagniecie " << endl; 
-    return (2*dmg*speed*k_lvl());
+    return (2*dmg*speed*k_lvl()*limit);
+}
+
+int omamienie() { // return lvl
+    cout << " strzal z laczka" << endl;
+    return (lvl*def*speed*limit);
+}
+int heal(){ // return hp
+    chwilowe = 0;
+    cout << "leczenie" ;
+    chwilowe = hp*speed*def*limit;
+    cout << " = " << chwilowe << endl;
+    return chwilowe;
+}
+int energetyk(){ // return speed
+    cout << "energetyk - BOOST!" << endl;
+    return (hp*def*speed*limit);
 }
 int kamikadze_s(){
     int a = 0; a = a+ruch_()+w_weapon();
@@ -88,23 +105,7 @@ else if(id == 7){return kamikadze_s();}
 else if(id == 8){return ruch_();}
 else if(id == 9){return w_weapon();}
 else if(id == 10){return flash_s();}
-return yeet();}
-
-int omamienie() { // return lvl
-    cout << "ty tepy ch*ju" << endl;
-    return (lvl*def*speed);
-}
-int heal(){ // return hp
-    chwilowe = 0;
-    cout << "leczenie" ;
-    chwilowe = hp*speed*def;
-    cout << " = " << chwilowe << endl;
-    return chwilowe;
-}
-int energetyk(){ // return speed
-    cout << "energetyk - BOOST!" << endl;
-    return (hp*def*speed);
-}};
+return yeet();}};
 
 struct klass_e{ // enemy
 int hp;
@@ -113,26 +114,28 @@ int def;
 int speed;
 int charyzma; // magia  "-" czarna
 int lvl; // jako losowanie kryta
-int k_lvl(){int a = los_atak(lvl); if(a>=5){a=a%7;}else{a=0;}; return (a*lvl);}
+int k_lvl(){int a = los_atak(lvl); if(a>=5){a=a%7;cout<<"krytyk\n";}else{a=0;}; return (a*lvl/10);}
 int a_t(){ //atak fizyczny
     string s_a_t[4] = { {"z liscia"},{"kop w 4 litery"},{"scratching"},{"trupi jad"}};
     cout << s_a_t[los_atak(4)-1] << endl; 
-    return (dmg*speed*k_lvl());};// deafult
+    return (dmg*speed*k_lvl()*limit);};// deafult
 int exorcyzm(){ // magik
     cout << "lorem ipsum" << endl; 
-    return (dmg*speed*charyzma*k_lvl());
+    return (dmg*speed*charyzma*k_lvl()*limit*3);
 }
 int opetanie(){ //n_magig
         cout << "kto pytal" << endl; 
-    return (dmg*speed*(charyzma*(-1))*k_lvl());
+    return (dmg*speed*(charyzma*(-1))*k_lvl()*limit);
 }
 int bow(){ 
     cout << " HOWKAY " << endl; 
-    return (speed*def*k_lvl());
+    return (speed*def*k_lvl()*limit*2);
 }
 int radiation(){
-    cout << " uran - leczenie" << endl;
-    return (hp*k_lvl()*def);
+    cout << " uran - leczenie | ";
+    chwilowe = (hp*k_lvl()*def/10001);
+    cout << chwilowe << " punktow " << endl;
+    return chwilowe;
 }
 int miss(){
     cout << "miss" << endl;
@@ -142,8 +145,7 @@ int miss(){
  // gracz kazdy i enemy
     klass_p gracz;
     klass_e enemy;
- // gracze klassy
-    // admin0; aniol1; diabel2; thor3; P_E_K_K_A4; magik5; nygga_magik6; kamikadze7; smok8; mini_P_E_K_K_A9; flash10;
+ // gracze klassy // admin0; aniol1; diabel2; thor3; P_E_K_K_A4; magik5; nygga_magik6//mroczny; kamikadze7; smok8; mini_P_E_K_K_A9; flash10;
     klass_p admin = {
     999, // hp
     499, // dmg
@@ -328,7 +330,7 @@ int miss(){
 void klassa_postaci(){
         int wybor=0;
     cout << "| 1= aniol | 2= diabel | 3= thor | 4= P_E_K_K_A | 5= magik |\n"
-         << "| 6= nygga magik | 7= kamikadze | 8= smok | 9= mini_P_E_K_K_A | 10= flash| " ;
+         << "| 6= mroczny magik | 7= kamikadze | 8= smok | 9= mini_P_E_K_K_A | 10= flash| " ;
     cout << "\n-- wybiez klase 1,2,3... = " ; cin >> wybor;
     switch (wybor)
     {
@@ -434,6 +436,8 @@ cout << "\n przciwnik "<<n_t_e[z_p-1]<<" !!! ";
     }else { cout << "\nprzciwnik umarl bo nie zyje" ;};
     } while (enemy.hp > 0 && gracz.hp > 0);
 if(gracz.hp <= 0){game_over(2);};
+if(z_p==3){// nic
+}else{
 cout << "\n WYGRANNA !!!  ---  z "<< n_t_e[z_p-1] <<"\n nastepny przciwnik - "
  << n_t_e[z_p] // name tutorial enemy string // do petli
 << "\n leczenie !  ---  i + "<<(50*z_p)<<" do hp \n\n strat!\n" ;
@@ -442,7 +446,7 @@ if(z_p==1){
 enemy = golem;}
 else if(z_p==2){enemy = czarno_ksieznik;}
 else{// koniec petli c:
-};
+};};
 }//
     string l_7 = "\n\n WYGRANNA !!! \n przeszedles tutorial\n\n w strat wpisz liczbe 7 /by grac w pelna gre\n";
     cout << l_7;
