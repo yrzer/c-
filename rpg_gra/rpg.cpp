@@ -147,183 +147,73 @@ int miss(){
     klass_e enemy;
  // gracze klassy // admin0; aniol1; diabel2; thor3; P_E_K_K_A4; magik5; nygga_magik6//mroczny; kamikadze7; smok8; mini_P_E_K_K_A9; flash10;
     klass_p admin = {
-    999, // hp
-    499, // dmg
-    499, // def
-    99,  // speed
-    99,  // charyzma
-    99,  // lvl
+    999, 499, 499, 99, 99, 99,  
     };
     klass_p aniol = {
-    400, // hp
-    250, // dmg
-    300, // def
-    70,  // speed
-    99,  // charyzma
-    70,  // lvl
-    1,
+    400, 250, 300, 70,  99, 70, 1,
     };
     klass_p diabel = {
-    400, // hp
-    250, // dmg
-    300, // def
-    70,  // speed
-    -99,  // charyzma
-    70,  // lvl
-    2,
+    400, 250, 300, 70,  -99,  70,  2,
     };
     klass_p thor = {
-    500, // hp
-    200, // dmg
-    320, // def
-    60,  // speed
-    25,  // charyzma
-    50,  // lvl
-    3,
+    500, 200, 320, 60,  25,  50,  3,
     };
     klass_p P_E_K_K_A = {
-    750, // hp
-    200, // dmg
-    400, // def
-    20,  // speed
-    0,  // charyzma
-    25,  // lvl
-    4,
+    750, 200, 400, 20,  0,  25,  4,
     };
     klass_p magik = {
-    150, // hp
-    100, // dmg
-    200, // def
-    80,  // speed
-    70,  // charyzma
-    50,  // lvl
-    5,
+    150, 100, 200, 80,  70,  50, 5,
     };
     klass_p nygga_magik = {
-    150, // hp
-    100, // dmg
-    200, // def
-    80,  // speed
-    -70,  // charyzma
-    50,  // lvl
-    6,
+    150, 100, 200, 80,  -70,  50,  6,
     };
     klass_p kamikadze = {
-    150, // hp
-    100, // dmg
-    230, // def
-    80,  // speed
-    0,  // charyzma
-    99,  // lvl
-    7,
+    150, 100, 230, 80,  0,  99,  7,
     };
     klass_p smok = {
-    600, // hp
-    100, // dmg
-    250, // def
-    80,  // speed
-    5,  // charyzma
-    80,  // lvl
-    8,
+    600, 100, 250, 80, 5, 80, 8,
     };
     klass_p mini_P_E_K_K_A = {
-    650, // hp
-    250, // dmg
-    300, // def
-    60,  // speed
-    0,  // charyzma
-    55,  // lvl
-    9,
+    650, 250, 300, 60, 0, 55, 9,
     };
     klass_p flash = {
-    250, // hp
-    200, // dmg
-    130, // def
-    89,  // speed
-    0,  // charyzma
-    99,  // lvl
+    250, 200, 130, 89,  0, 99,  
     };
-
     // gracze klassy przciwnnicy // pion1; golem2; czarno_ksieznik3; bomber_man4; loki5; wilkolak6; wampir7; subkub8; duch9; boss10
     klass_e boss = {
-    499, // hp
-    249, // dmg
-    249, // def
-    49,  // speed
-    49,  // charyzma
-    49,  // lvl
+    499, 249, 249, 49, 49, 49,  
     };
     klass_e pion = {
-    100, // hp
-    70, // dmg
-    70, // def
-    30,  // speed
-    0,  // charyzma
-    25,  // lvl
+    100, 70, 70, 30, 0, 25,  
     };
     klass_e golem = {
-    350, // hp
-    100, // dmg
-    140, // def
-    20,  // speed
-    0,  // charyzma
-    20,  // lvl
+    350, 100, 140, 20, 0, 20,  
     };
     klass_e czarno_ksieznik = {
-    120, // hp
-    100, // dmg
-    70, // def
-    35,  // speed
-    -49,  // charyzma
-    20,  // lvl
+    120, 100, 70, 35, -49, 20,  
     };
     klass_e bomber_man = {
-    90, // hp
-    70, // dmg
-    130, // def
-    40,  // speed
-    0,  // charyzma
-    49,  // lvl      
+    90, 70, 130, 40, 0, 49,        
     };
     klass_e loki = {
-    180, // hp
-    130, // dmg
-    90, // def
-    32,  // speed
-    -39,  // charyzma
-    26,  // lvl
+    180, 130, 90, 32, -39, 26,  
     };
     klass_e wilkolak = {
-    300, // hp
-    200, // dmg
-    140, // def
-    32,  // speed
-    0,  // charyzma
-    30,  // lvl
+    300, 200, 140, 32, 0, 30,  
     };
     klass_e wampir = {
-    200, // hp
-    210, // dmg
-    100, // def
-    32,  // speed
-    0,  // charyzma
-    39,  // lvl
+    200, 210, 100, 32, 0, 39,  
     };
     klass_e subkub = {
-    150, // hp
-    110, // dmg
-    100, // def
-    32,  // speed
-    -15,  // charyzma
-    25,  // lvl
+    150, 110, 100, 32, -15, 25,  
     };
     klass_e duch = {
-    150, // hp
-    110, // dmg
-    249, // def
-    32,  // speed
-    -15,  // charyzma
-    25,  // lvl
+    150, 
+    110, 
+    249, 
+    32,  
+    -15,  
+    25,  
     };
    
 // tutorial
@@ -375,12 +265,12 @@ void klassa_postaci(){
 }
 
 void ruch_p(){
-    int wybor;
+    int wybor_atak=0;
     cout << "\n1 = defult | 2 = heal | 3 = energetyk | 4 = omamienie | 5 = atak specjaly" ;
     cout << "\n-- wybiez atak 1,2,3,4,5 = " ;
         atak_e = 0;atak_p = 0;
-    cin >> wybor;
-        switch (wybor)
+    cin >> wybor_atak;
+        switch (wybor_atak)
         {
         case 0:// admin
             atak_p = gracz.yeet();  break;
