@@ -6,7 +6,7 @@
 #include <time.h>
 using namespace std;
 int chwilowe;
-int atak_e,atak_p,wybor_l,score;
+int atak_e,atak_p,wybor_l,score,sruuuuuu;
 double limit= 0.00014; 
 string nazwa_boss = " !!! -- BOSS -- !!!";
 
@@ -221,14 +221,11 @@ void klassa_postaci(){
         int wybor=0;
     cout << "| 1= aniol | 2= diabel | 3= thor | 4= P_E_K_K_A | 5= magik |\n"
          << "| 6= mroczny magik | 7= kamikadze | 8= smok | 9= mini_P_E_K_K_A | 10= flash| " ;
-    cout << "\n-- wybiez klase 1,2,3... = " ; cin >> wybor;
+    cout << "\n-- wybiez klase 1,2,3... =  // abc... - auto 1" ; cin >> wybor;
     switch (wybor)
     {
     case 0:
         gracz = admin;
-        break;
-    case 1:
-        gracz = aniol;
         break;
     case 2:
         gracz = diabel;
@@ -258,15 +255,14 @@ void klassa_postaci(){
         gracz = admin;
         break;
     default:
-    cout << "\n error\n" ;
-    klassa_postaci();
+        gracz = aniol;
         break;
     }
 }
 
 void ruch_p(){
-    int wybor_atak=0;
-    cout << "\n1 = defult | 2 = heal | 3 = energetyk | 4 = omamienie | 5 = atak specjaly" ;
+    int wybor_atak;
+    cout << "\n1 = defult | 2 = heal | 3 = energetyk | 4 = omamienie | 5 = atak specjaly // abc... - auto 1" ;
     cout << "\n-- wybiez atak 1,2,3,4,5 = " ;
         atak_e = 0;atak_p = 0;
     cin >> wybor_atak;
@@ -465,6 +461,10 @@ int main(){ // /////////////////// main
         break;
     default:
         cout << "error\n";
+        system("pause");
+        if(sruuuuuu==1){
+        exit(EXIT_SUCCESS);}
+        sruuuuuu = 1;
         main();
     case 1:
         int abc = tutorial();

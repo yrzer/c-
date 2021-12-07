@@ -9,11 +9,10 @@
 using namespace std;
 
 int main(){
-char wybor;
+int wybor;
 cin>>wybor;
-cout<<(unsigned)strlen(wybor)<< endl;
-switch (wybor)
-        {
+cout<< wybor << endl;
+switch (wybor){
         case 0:// admin
             cout<<"admin";  break;
         case 2:
